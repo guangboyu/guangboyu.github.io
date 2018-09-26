@@ -1,9 +1,7 @@
 # basic options
 name: guangbo
-title: Guangbo Blog
 author: guangbo
-email: ygbuestc@gmail.com
-description: my blog
+email: guangboyu@alumni.usc.edu
 github_username: guangboyu
 
 # Build settings
