@@ -1,11 +1,11 @@
 # basic options
-title:  Guangbo Blog
-author:  guangbo
-email:  ygbuestc@gmail.com
-description:  my blog
-twitter_username:  guangboyu
-github_username:  guangboyu
+title: Guangbo Blog
+author: guangbo
+email: ygbuestc@gmail.com
+description: my blog
+twitter_username: guangboyu
+github_username: guangboyu
 
 # Build settings
-markdown:  kramdown
-theme:  minima
+markdown: kramdown
+theme: minima
