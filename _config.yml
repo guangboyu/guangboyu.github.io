@@ -1,10 +1,10 @@
 # basic options
-title: Your awesome title
-author: GitHub User
-email: your-email@domain.com
-description: A wonderful site
-twitter_username: jekyllrb
-github_username:  jekyll
+title: Guangbo Blog
+author: guangbo
+email: ygbuestc@gmail.com
+description: my blog
+twitter_username: guangboyu
+github_username:  guangboyu
 
 # Build settings
 markdown: kramdown
