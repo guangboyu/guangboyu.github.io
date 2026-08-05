@@ -143,6 +143,10 @@ def main() -> None:
             "feature": bool(meta.get("feature")),
         })
 
+    # Newest year first. The sort is stable, so within a year the order stays
+    # whatever captions.txt and the filenames give you.
+    photos.sort(key=lambda p: p["year"] or "", reverse=True)
+
     body = json.dumps(photos, indent=2, ensure_ascii=False)
     OUT_JS.parent.mkdir(parents=True, exist_ok=True)
     OUT_JS.write_text(

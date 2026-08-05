@@ -106,7 +106,13 @@ Re-running is safe and produces identical output, so it is fine to run on every 
    skipped, and your captions are never overwritten.
 
    All four renditions together come to roughly 1.3 MB per photo, so the GitHub Pages
-   1 GB ceiling sits somewhere north of 700 photos.
+   1 GB ceiling sits somewhere north of 700 photos. 100 photos is about 125 MB and takes
+   roughly five minutes to build the first time; after that only new files are processed.
+
+**Photos group by year automatically.** Once more than one year is present, each gets a
+heading and its own block, so a long gallery reads as sections rather than one endless
+column. Newest year first; within a year the order follows `captions.txt`. With a single
+year present, no headings appear.
 
 Requires ImageMagick (`sudo apt install imagemagick`). Nothing else.
 

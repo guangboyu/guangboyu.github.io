@@ -13,9 +13,39 @@
     return;
   }
 
-  /* ---- grid ---- */
+  /* ---- grid ----
+     Photos are grouped by year. Once there is more than one year, each gets its
+     own heading and its own column block, so a long gallery stays navigable
+     instead of running as one endless wall. */
+
+  var years = [];
+  photos.forEach(function (p) {
+    var y = p.year || '';
+    if (years.indexOf(y) === -1) years.push(y);
+  });
+  var grouped = years.length > 1;
+  var container = grid.parentNode;
+  var currentYear = null;
+  var target = grid;
 
   photos.forEach(function (photo, i) {
+    if (grouped && photo.year !== currentYear) {
+      currentYear = photo.year;
+      if (target !== grid || target.childNodes.length) {
+        var heading = document.createElement('h2');
+        heading.className = 'gallery-group';
+        heading.textContent = currentYear || 'Undated';
+        container.insertBefore(heading, null);
+        target = document.createElement('div');
+        target.className = 'gallery';
+        container.insertBefore(target, null);
+      } else {
+        var first = document.createElement('h2');
+        first.className = 'gallery-group';
+        first.textContent = currentYear || 'Undated';
+        container.insertBefore(first, grid);
+      }
+    }
     var figure = document.createElement('figure');
     figure.className = 'shot' + (photo.feature ? ' shot--feature' : '');
 
@@ -61,7 +91,7 @@
       figure.appendChild(caption);
     }
 
-    grid.appendChild(figure);
+    target.appendChild(figure);
   });
 
   /* ---- lightbox ---- */
@@ -106,7 +136,7 @@
     if (lastFocused) lastFocused.focus();
   }
 
-  grid.addEventListener('click', function (event) {
+  container.addEventListener('click', function (event) {
     var button = event.target.closest('button[data-index]');
     if (button) open(Number(button.dataset.index));
   });

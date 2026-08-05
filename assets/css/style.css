@@ -312,6 +312,13 @@ table.results tbody tr.is-key td:first-child { font-weight: 600; }
 
 /* ---------- 8. Photography ---------- */
 
+.gallery-group {
+  font-size: 1.25rem; color: var(--n900);
+  margin: 2.75rem 0 0; padding-bottom: .6rem;
+  border-bottom: 1px solid var(--n200);
+}
+.gallery-group:first-of-type { margin-top: 1.75rem; }
+
 .gallery { columns: 2; column-gap: 1rem; margin-top: 1.5rem; }
 @media (max-width: 46em) { .gallery { columns: 1; } }
 
