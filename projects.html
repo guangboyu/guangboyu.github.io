@@ -95,9 +95,12 @@
         <p class="card__meta">QLoRA supervised fine-tuning followed by GRPO on Qwen3-VL, evaluated on
         VQAv2, GQA, CLEVR, and TextVQA. &nbsp;<span class="stamp">2026</span></p>
 
-        <p class="card__body">Reinforcement learning with verifiable rewards is how a model is taught
-        to reason before it answers. Run end to end here, it lifts accuracy on questions that need
-        reasoning, and the gain carries to a benchmark the model never trained on.</p>
+        <p class="card__body">The system answers questions about images, and is trained to work
+        through them step by step rather than guess from the picture alone. Training runs in two
+        stages: supervised fine-tuning on question and answer pairs, then reinforcement learning where
+        the only reward is whether the final answer turns out to be right. That lifts accuracy on the
+        questions that need reasoning, and the gain carries to a benchmark the model never saw in
+        training.</p>
 
         <div class="table-scroll">
           <table class="results">

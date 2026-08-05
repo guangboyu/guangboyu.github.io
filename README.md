@@ -99,9 +99,14 @@ Re-running is safe and produces identical output, so it is fine to run on every 
    python3 scripts/build-photos.py
    ```
 
-   It writes a 2400px display copy and a 1200px thumbnail for each photo, strips EXIF
-   including GPS, and regenerates `assets/js/photos.js`. Re-running is cheap: files that
-   are already current are skipped, and your captions are never overwritten.
+   For each photo it writes a 2000px display copy and a 900px thumbnail, each in both
+   WebP and JPEG, strips EXIF including GPS, and regenerates `assets/js/photos.js`.
+   Browsers load the WebP and fall back to JPEG, so the gallery grid costs about 80 KB
+   per photo rather than 240 KB. Re-running is cheap: files that are already current are
+   skipped, and your captions are never overwritten.
+
+   All four renditions together come to roughly 1.3 MB per photo, so the GitHub Pages
+   1 GB ceiling sits somewhere north of 700 photos.
 
 Requires ImageMagick (`sudo apt install imagemagick`). Nothing else.
 

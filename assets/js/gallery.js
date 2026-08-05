@@ -32,7 +32,17 @@
     img.loading = i < 2 ? 'eager' : 'lazy';
     img.decoding = 'async';
 
-    button.appendChild(img);
+    if (photo.thumbWebp) {
+      var picture = document.createElement('picture');
+      var source = document.createElement('source');
+      source.type = 'image/webp';
+      source.srcset = photo.thumbWebp;
+      picture.appendChild(source);
+      picture.appendChild(img);
+      button.appendChild(picture);
+    } else {
+      button.appendChild(img);
+    }
     figure.appendChild(button);
 
     if (photo.title || photo.place || photo.year) {
@@ -68,9 +78,12 @@
     });
   }
 
+  var boxSource = box.querySelector('source');
+
   function show(i) {
     index = (i + photos.length) % photos.length;
     var photo = photos[index];
+    if (boxSource) boxSource.srcset = photo.srcWebp || photo.src;
     boxImg.src = photo.src;
     boxImg.alt = photo.title + (photo.place ? ', ' + photo.place : '');
     boxCap.textContent = [photo.title, photo.place, photo.year]

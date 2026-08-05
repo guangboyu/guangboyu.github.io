@@ -2,9 +2,11 @@
 const PHOTOS = [
   {
     "src": "assets/photos/large/delicate-arch.jpg",
+    "srcWebp": "assets/photos/large/delicate-arch.webp",
     "thumb": "assets/photos/thumb/delicate-arch.jpg",
-    "w": 1200,
-    "h": 800,
+    "thumbWebp": "assets/photos/thumb/delicate-arch.webp",
+    "w": 900,
+    "h": 600,
     "title": "Delicate Arch",
     "place": "Arches National Park, Utah",
     "year": "2024",

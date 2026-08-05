@@ -35,9 +35,10 @@ THUMB = ROOT / "assets" / "photos" / "thumb"
 CAPTIONS = ROOT / "assets" / "photos" / "captions.txt"
 OUT_JS = ROOT / "assets" / "js" / "photos.js"
 
-# Long-edge pixels and JPEG quality for each rendition.
-LARGE_EDGE, LARGE_Q = 2400, 82
-THUMB_EDGE, THUMB_Q = 1200, 78
+# Long-edge pixels and quality for each rendition. WebP is what browsers actually
+# load; the JPEG is a fallback for anything that cannot read it.
+LARGE_EDGE, LARGE_JPG_Q, LARGE_WEBP_Q = 2000, 80, 78
+THUMB_EDGE, THUMB_JPG_Q, THUMB_WEBP_Q = 900, 78, 72
 
 SUFFIXES = {".jpg", ".jpeg", ".png", ".tif", ".tiff", ".webp"}
 
@@ -57,19 +58,19 @@ def render(src: Path, dst: Path, edge: int, quality: int) -> None:
     if dst.exists() and dst.stat().st_mtime >= src.stat().st_mtime:
         return
     dst.parent.mkdir(parents=True, exist_ok=True)
-    subprocess.run(
-        [
-            need("convert"), str(src),
-            "-auto-orient",          # respect the EXIF rotation flag
-            "-strip",                # drop EXIF, including GPS coordinates
-            "-resize", f"{edge}x{edge}>",   # never upscale
-            "-quality", str(quality),
-            "-interlace", "Plane",   # progressive JPEG
-            "-colorspace", "sRGB",
-            str(dst),
-        ],
-        check=True,
-    )
+    args = [
+        need("convert"), str(src),
+        "-auto-orient",          # respect the EXIF rotation flag
+        "-strip",                # drop EXIF, including GPS coordinates
+        "-resize", f"{edge}x{edge}>",   # never upscale
+        "-quality", str(quality),
+        "-colorspace", "sRGB",
+    ]
+    if dst.suffix == ".webp":
+        args += ["-define", "webp:method=6"]
+    else:
+        args += ["-interlace", "Plane"]   # progressive JPEG
+    subprocess.run(args + [str(dst)], check=True)
     print(f"  rendered {dst.relative_to(ROOT)}")
 
 
@@ -121,16 +122,19 @@ def main() -> None:
     for src in originals:
         print(f"{src.name}")
         stem = src.stem
-        large = LARGE / f"{stem}.jpg"
         thumb = THUMB / f"{stem}.jpg"
-        render(src, large, LARGE_EDGE, LARGE_Q)
-        render(src, thumb, THUMB_EDGE, THUMB_Q)
+        render(src, LARGE / f"{stem}.jpg",  LARGE_EDGE, LARGE_JPG_Q)
+        render(src, LARGE / f"{stem}.webp", LARGE_EDGE, LARGE_WEBP_Q)
+        render(src, thumb,                  THUMB_EDGE, THUMB_JPG_Q)
+        render(src, THUMB / f"{stem}.webp", THUMB_EDGE, THUMB_WEBP_Q)
 
         w, h = dimensions(thumb)
         meta = captions.get(src.name) or captions.get(f"{stem}.jpg") or {}
         photos.append({
             "src": f"assets/photos/large/{stem}.jpg",
+            "srcWebp": f"assets/photos/large/{stem}.webp",
             "thumb": f"assets/photos/thumb/{stem}.jpg",
+            "thumbWebp": f"assets/photos/thumb/{stem}.webp",
             "w": w,
             "h": h,
             "title": meta.get("title") or titleize(stem),
