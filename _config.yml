@@ -1,9 +1,0 @@
-# basic options
-name: guangbo
-author: guangbo
-email: guangboyu@alumni.usc.edu
-github_username: guangboyu
-
-# Build settings
-markdown: kramdown
-theme: minima

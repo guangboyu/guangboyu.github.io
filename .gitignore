@@ -1,0 +1,13 @@
+# Full-resolution photos stay local. Only the resized renditions ship.
+assets/photos/originals/
+
+# Agent tooling that landed here from a plugin install. Not part of the site.
+.agents/
+.claude/
+skills-lock.json
+
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+__pycache__/

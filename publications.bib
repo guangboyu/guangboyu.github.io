@@ -1,0 +1,137 @@
+% Publications for guangboyu.github.io
+%
+% Export entries from Google Scholar (or Zotero / Mendeley) and paste them here,
+% then run:  python3 scripts/build-pubs.py
+%
+% Standard BibTeX fields are understood: author, title, journal, booktitle, year,
+% volume, number, pages, doi, url.
+%
+% Four extra fields are specific to this site:
+%   status  = {Under review}   groups the entry above the dated ones
+%   venue   = {...}            overrides the composed journal / volume line
+%   summary = {...}            one short paragraph shown under the entry
+%   code    = {https://...}    adds a "Code" link
+%   role    = {co-first}       overrides the author position detected automatically
+%
+% Wrap text in *asterisks* for italics. Author position is worked out from the
+% author list, so a first-author paper is flagged without you saying so.
+
+@unpublished{yu2026pdac,
+  author  = {Yu, Guangbo and others},
+  title   = {Cross-species foundation-model imaging biomarkers for pancreatic ductal adenocarcinoma},
+  status  = {Under review},
+  summary = {Frozen foundation-model embeddings recover matched biological endpoints
+             from both mouse 9.4T MRI and human clinical CT, outperforming hand-crafted
+             radiomics, end-to-end fine-tuning, and a purpose-built 3D-CT
+             vision-language model.},
+}
+
+@article{yu2025multitask,
+  author  = {Yu, Guangbo and Zhang, Zigeng and Eresen, Aydin and Hou, Qiaoming and Yaghmai, Vahid and Zhang, Zhuoli},
+  title   = {Multi-Task Deep Learning on MRI for Tumor Segmentation and Treatment Response Prediction in an Experimental Model of Hepatocellular Carcinoma},
+  journal = {Diagnostics},
+  year    = {2025},
+  volume  = {15},
+  number  = {22},
+  pages   = {2844},
+  doi     = {10.3390/diagnostics15222844},
+  code    = {https://github.com/guangboyu/multi_task_HCC_classification},
+  summary = {U-Net++ with an EfficientNet-B0 encoder segments the tumor and predicts
+             response in one pass, reaching Dice 0.92 and AUROC 0.97, with the imaging
+             biomarkers validated against H&E viability and TUNEL apoptosis.},
+}
+
+@inproceedings{yu2025ismrm,
+  author = {Yu, Guangbo and others},
+  title  = {AI-Derived MRI Biomarkers Using Vision Transformer for Predicting Combination Immunotherapy Outcomes in Liver Cancer},
+  venue  = {ISMRM & ISMRT Annual Meeting},
+  year   = {2025},
+}
+
+@article{zhang2025ire,
+  author  = {Zhang, Zigeng and Yu, Guangbo and Hou, Qiaoming and others},
+  title   = {Combination of Irreversible Electroporation and *Clostridium novyi*-NT Bacterial Therapy for Colorectal Liver Metastasis},
+  journal = {Cancers},
+  year    = {2025},
+  volume  = {17},
+  number  = {15},
+  pages   = {2477},
+  doi     = {10.3390/cancers17152477},
+}
+
+@article{zhang2025sorafenib,
+  author  = {Zhang, Zigeng and Yu, Guangbo and others},
+  title   = {Therapy Combining Sorafenib and Natural Killer Cells for Hepatocellular Carcinoma: Insights from Magnetic Resonance Imaging and Histological Analyses},
+  journal = {Cancers},
+  year    = {2025},
+  volume  = {17},
+  number  = {4},
+  pages   = {699},
+  doi     = {10.3390/cancers17040699},
+}
+
+@article{yu2024radiomics,
+  author  = {Yu, Guangbo and others},
+  title   = {MRI radiomics to monitor therapeutic outcome of sorafenib plus IHA transcatheter NK cell combination therapy in hepatocellular carcinoma},
+  journal = {Journal of Translational Medicine},
+  year    = {2024},
+  doi     = {10.1186/s12967-024-04873-w},
+  summary = {743 radiomic features reduced to five. An SVM on T1w and T2w reaches AUC
+             1.00 for binary response and 0.93 across outcome classes, with MRI-derived
+             measures tracking histology at r = 0.94.},
+}
+
+@article{yu2024ici,
+  author  = {Yu, Guangbo and Zhang, Zigeng and Eresen, Aydin and others},
+  title   = {Predicting and Monitoring Immune Checkpoint Inhibitor Therapy Using Artificial Intelligence in Pancreatic Cancer},
+  journal = {International Journal of Molecular Sciences},
+  year    = {2024},
+  volume  = {25},
+  number  = {22},
+  pages   = {12038},
+  doi     = {10.3390/ijms252212038},
+}
+
+@article{eresen2024bmc,
+  author  = {Eresen, Aydin and Zhang, Zigeng and Yu, Guangbo and others},
+  title   = {Sorafenib plus memory-like natural killer cell immunochemotherapy boosts treatment response in liver cancer},
+  journal = {BMC Cancer},
+  year    = {2024},
+  volume  = {24},
+  pages   = {1215},
+  doi     = {10.1186/s12885-024-12718-4},
+}
+
+@article{eresen2024ajcr,
+  author  = {Eresen, Aydin and Zhang, Zigeng and Yu, Guangbo and others},
+  title   = {Sorafenib plus memory like natural killer cell combination therapy in hepatocellular carcinoma},
+  journal = {American Journal of Cancer Research},
+  year    = {2024},
+  url     = {https://pubmed.ncbi.nlm.nih.gov/38323279/},
+}
+
+@article{zhang2024mrimonitoring,
+  author  = {Zhang, Zigeng and Yu, Guangbo and others},
+  title   = {MRI monitoring of combined therapy with transcatheter arterial delivery of NK cells and systemic administration of sorafenib},
+  journal = {American Journal of Cancer Research},
+  year    = {2024},
+}
+
+@article{zhang2024dcvaccine,
+  author  = {Zhang, Zigeng and Yu, Guangbo and others},
+  title   = {Dendritic cell vaccination combined with irreversible electroporation for treating pancreatic cancer, a narrative review},
+  journal = {Annals of Translational Medicine},
+  year    = {2024},
+}
+
+@inproceedings{gan2022semeval,
+  author  = {Gan, Weichao and Lin, Yuanping and Yu, Guangbo and others},
+  title   = {Qtrade AI at SemEval-2022 Task 11: An Unified Framework for Multilingual NER Task},
+  venue   = {Proceedings of SemEval-2022, ACL},
+  year    = {2022},
+  url     = {https://aclanthology.org/2022.semeval-1.228/},
+  role    = {co-first},
+  summary = {An XLM-RoBERTa system with continued pretraining, adversarial training, and
+             ensembling. Third in the multilingual track, fourth in code-mixed, seventh
+             in Chinese.},
+}

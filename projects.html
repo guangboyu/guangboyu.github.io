@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects — Guangbo Yu</title>
+<meta name="description" content="Vision-language post-training, multimodal recommendation, medical VQA, and data-curation pipelines built by Guangbo Yu.">
+<link rel="canonical" href="https://guangboyu.github.io/projects.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Projects — Guangbo Yu">
+<meta property="og:description" content="Vision-language post-training, multimodal recommendation, medical VQA, and data-curation pipelines.">
+<meta name="theme-color" content="#fefffe" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>
+  try { var t = localStorage.getItem('theme');
+        if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="shell topbar__in">
+    <a class="wordmark" href="index.html">Guangbo Yu</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html">About</a>
+      <a href="publications.html">Publications</a>
+      <a href="projects.html" aria-current="page">Projects</a>
+      <a href="photography.html">Photography</a>
+    </nav>
+    <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch colour theme">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+           stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<div class="shell layout">
+
+  <aside class="rail">
+    <img class="avatar" src="assets/img/profile.jpg" width="720" height="720" alt="Guangbo Yu">
+    <p class="rail__name">Guangbo Yu</p>
+    <p class="rail__role">PhD Candidate</p>
+    <p class="rail__org">University of California, Irvine</p>
+
+    <div class="rail__links">
+      <a href="mailto:ygbusc@gmail.com" aria-label="Email" title="Email">
+        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+      </a>
+      <a href="https://github.com/guangboyu" aria-label="GitHub" title="GitHub">
+        <svg class="is-solid" viewBox="0 0 24 24"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.17c-3.2.7-3.88-1.37-3.88-1.37-.52-1.34-1.28-1.7-1.28-1.7-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
+      </a>
+      <a href="https://scholar.google.com/citations?user=pDd1pLEAAAAJ&amp;hl=en" aria-label="Google Scholar" title="Google Scholar">
+        <svg viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17"/><path d="M5 12.5V17c0 1.66 3.13 3 7 3s7-1.34 7-3v-4.5"/></svg>
+      </a>
+      <a href="https://orcid.org/0009-0001-9675-1129" aria-label="ORCID" title="ORCID">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><text x="12" y="15.8" text-anchor="middle"
+          font-size="9.5" font-weight="700" font-family="Inter, sans-serif" fill="currentColor" stroke="none">iD</text></svg>
+      </a>
+      <a href="https://huggingface.co/omnifish123" aria-label="Hugging Face" title="Hugging Face">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.4 14.3c.9 1.2 2.1 1.8 3.6 1.8s2.7-.6 3.6-1.8"/><circle cx="9" cy="10" r=".7" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r=".7" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="https://500px.com/p/ygbuestc?view=photos" aria-label="500px" title="Photography on 500px">
+        <svg viewBox="0 0 24 24"><path d="M3 8h3l1.5-2h9L18 8h3v11H3z"/><circle cx="12" cy="13" r="3.4"/></svg>
+      </a>
+    </div>
+
+    <div class="panel">
+      <h2>Built with</h2>
+      <ul>
+        <li>PyTorch, Hugging Face, TRL</li>
+        <li>QLoRA, GRPO, LoRA</li>
+        <li>FAISS, ONNX, FastAPI</li>
+        <li>PyRadiomics, MONAI</li>
+      </ul>
+    </div>
+  </aside>
+
+  <main id="main">
+
+    <h1 class="page-title">Projects</h1>
+    <p class="lede">Work outside the papers, built on one GPU. Each links to the code, and where they
+    exist, to the training runs, so the numbers can be checked rather than taken on trust.</p>
+
+    <section class="section">
+      <div class="section__head"><h2>Personal Work</h2></div>
+
+      <article class="card">
+        <h3 class="card__title">VQA-RLVR: post-training a vision-language model, and auditing the
+        benchmark</h3>
+        <p class="card__meta">QLoRA supervised fine-tuning followed by GRPO on Qwen3-VL, evaluated on
+        VQAv2, GQA, CLEVR, and TextVQA. &nbsp;<span class="stamp">2026</span></p>
+
+        <p class="card__body">Reinforcement learning with verifiable rewards is how a model is taught
+        to reason before it answers. Run end to end here, it lifts accuracy on questions that need
+        reasoning, and the gain carries to a benchmark the model never trained on.</p>
+
+        <div class="table-scroll">
+          <table class="results">
+            <thead>
+              <tr>
+                <th scope="col">Reasoning mode</th>
+                <th scope="col">VQAv2</th>
+                <th scope="col">GQA</th>
+                <th scope="col">TextVQA (unseen)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Zero-shot</td><td>64.9</td><td>51.9</td><td>70.2</td></tr>
+              <tr class="is-key"><td>After GRPO</td><td>69.5</td><td>53.9</td><td>72.7</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">Qwen3-VL-2B, full evaluation sets. Total cost: nothing in GPU time,
+        19 cents for the judge.</p>
+
+        <p class="card__body">The more interesting result was about the scoring. Exact match calls an
+        answer wrong whenever the wording differs, and an LLM judge showed that between 23% and 49% of
+        those failures were correct answers. That matters because the field reports a penalty for
+        letting models think out loud, and once the grading is fixed, most of that penalty is not
+        there. A second surprise pointed the same way: training on synthetic CLEVR alone, with no
+        natural images at all, produced the largest gain on unseen data and damaged nothing.</p>
+
+        <p class="links">
+          <a href="https://github.com/guangboyu/vqa-rlvr">Code</a>
+          <a href="https://huggingface.co/omnifish123">Adapters</a>
+          <a href="https://wandb.ai/ygbuestc-uci/vqa-rlvr">Training runs</a>
+        </p>
+      </article>
+
+      <article class="card">
+        <h3 class="card__title">Multimodal Retrieval and Ranking for Cold-Start Recommendation</h3>
+        <p class="card__meta">A full retrieval-and-ranking stack on Amazon Reviews 2023.
+        &nbsp;<span class="stamp">2025</span></p>
+
+        <p class="card__body">The system takes a shopper's history and returns a ranked feed, narrowing
+        the catalogue through retrieval, pre-ranking, ranking, and a diversity pass. It is built to
+        handle the case every store faces on its worst day: a product nobody has bought yet. The usual
+        item ID carries no information about a new listing, so the recommendation falls back to
+        whatever is popular. Its picture and description carry plenty.</p>
+
+        <figure class="diagram">
+          <svg viewBox="0 0 600 148" role="img"
+               aria-label="A four-stage cascade: 6.6 million interactions from Amazon Reviews 2023 feed a two-tower FAISS retrieval stage, then a ranking stage using DIN, DCN-v2 and MMoE, then ONNX serving at 10 to 16 milliseconds p99. Qwen2.5-VL item profiles covering 233 thousand items feed into the retrieval and ranking stages.">
+            <defs>
+              <marker id="dgB" viewBox="0 0 8 8" refX="7" refY="4"
+                      markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0 1 L7 4 L0 7" fill="none" stroke="currentColor"
+                      stroke-opacity="0.45" stroke-width="1.1"/>
+              </marker>
+            </defs>
+
+            <rect class="dg-box" x="0"   y="10" width="132" height="46" rx="4"/>
+            <rect class="dg-box" x="156" y="10" width="132" height="46" rx="4"/>
+            <rect class="dg-box" x="312" y="10" width="132" height="46" rx="4"/>
+            <rect class="dg-box" x="468" y="10" width="132" height="46" rx="4"/>
+
+            <text class="dg-t" x="66"  y="28" text-anchor="middle">two-tower + FAISS</text>
+            <text class="dg-s" x="66"  y="44" text-anchor="middle">200 candidates</text>
+            <text class="dg-t" x="222" y="28" text-anchor="middle">distilled pre-rank</text>
+            <text class="dg-s" x="222" y="44" text-anchor="middle">top 50</text>
+            <text class="dg-t" x="378" y="28" text-anchor="middle">DIN / DCN-v2 / MMoE</text>
+            <text class="dg-s" x="378" y="44" text-anchor="middle">top 50</text>
+            <text class="dg-t" x="534" y="28" text-anchor="middle">MMR / DPP re-rank</text>
+            <text class="dg-s" x="534" y="44" text-anchor="middle">12 shown</text>
+
+            <line class="dg-line" x1="134" y1="33" x2="152" y2="33" marker-end="url(#dgB)"/>
+            <line class="dg-line" x1="290" y1="33" x2="308" y2="33" marker-end="url(#dgB)"/>
+            <line class="dg-line" x1="446" y1="33" x2="464" y2="33" marker-end="url(#dgB)"/>
+
+            <rect class="dg-box dg-fill" x="0" y="96" width="600" height="32" rx="4"/>
+            <text class="dg-t" x="300" y="116" text-anchor="middle">Qwen2.5-VL item profiles and RQ-VAE semantic IDs</text>
+            <line class="dg-line" x1="66"  y1="96" x2="66"  y2="60" marker-end="url(#dgB)"/>
+            <line class="dg-line" x1="378" y1="96" x2="378" y2="60" marker-end="url(#dgB)"/>
+          </svg>
+          <figcaption>Retrieval narrows millions of candidates to hundreds, ranking orders them, and
+          the item profiles generated by a vision-language model feed both stages.</figcaption>
+        </figure>
+
+        <p class="card__body">Feeding the retrieval tower images and text instead of item IDs alone
+        lifted Recall@100 by 66%, and by 81% on exactly the cold-start items the design was meant to
+        rescue. The result held on a catalogue eight times larger, reached by changing one config file,
+        and the whole cascade answers in 10 to 16&nbsp;ms on CPU.</p>
+
+        <p class="card__body">The repository carries the full ablation, along with the cascade bug
+        where a ranker scoring well on its own was making the final list worse.</p>
+
+        <figure class="media">
+          <img src="assets/img/recsys-demo.png" width="900" height="338" loading="lazy"
+               alt="The recommender interface, showing a shopper's recent purchases alongside the held-out item the system is asked to predict.">
+          <figcaption>A shopper's recent purchases, and on the right the item they actually bought
+          next, held out for the system to predict.</figcaption>
+        </figure>
+
+        <p class="links"><a href="https://github.com/guangboyu/multimodal-cascade-recsys">Code</a></p>
+      </article>
+
+      <article class="card">
+        <h3 class="card__title">A small vision-language model for clinical questions</h3>
+        <p class="card__meta">SigLIP paired with SmolLM2, roughly 445M parameters, trained from scratch
+        on 200k image and text pairs. &nbsp;<span class="stamp">2025</span></p>
+        <p class="card__body">Six variants, built to isolate what actually mattered rather than to
+        report one number: all four corpora against one domain at a time, and LoRA against full
+        fine-tuning. LoRA at rank 16 held 97% of full fine-tuning accuracy while training a third of
+        the parameters. The lesson that transferred to later work came from the data mix. Without
+        temperature-weighted sampling the largest corpus took 96.5% of every batch and drowned the
+        specialist sets; at T&nbsp;=&nbsp;0.5 that fell to 79%.</p>
+        <p class="links"><a href="https://huggingface.co/omnifish123">Models and demo</a></p>
+      </article>
+    </section>
+
+    <section class="section">
+      <div class="section__head"><h2>In the Lab</h2></div>
+
+      <article class="card">
+        <h3 class="card__title">Fixing the labels instead of the model</h3>
+        <p class="card__meta">Two data-curation pipelines with a foundation model in the loop.
+        &nbsp;<span class="stamp">2026</span></p>
+        <p class="card__body">Our results had stopped improving, and the reason was not the
+        architecture. It was that annotation is slow, and slow annotation means noisy labels. One
+        pipeline re-segments thousands of preclinical MRI timepoints with MedSAM2 and cross-checks each
+        result against geometric sanity tests, so a human reviewer only has to keep, accept, or edit.
+        The other replaced whole-slide annotation across a five-stain pathology cohort.</p>
+        <p class="card__body">Swapping the cleaned labels into an unchanged downstream model moved
+        prognosis AUROC from 0.70 to 0.90, at about a fifth of the annotation time the lab had
+        budgeted. It also surfaced the strongest signal in the dataset, an immune-cell ratio the
+        previous labels had hidden completely, and caught a contaminated slide before it reached the
+        cohort statistics.</p>
+      </article>
+    </section>
+
+  </main>
+</div>
+
+<div class="shell">
+  <footer class="site-foot">
+    <span>Irvine, California</span>
+    <span>Built as static HTML. <a href="https://github.com/guangboyu">Source</a></span>
+  </footer>
+</div>
+
+<script src="assets/js/site.js"></script>
+</body>
+</html>

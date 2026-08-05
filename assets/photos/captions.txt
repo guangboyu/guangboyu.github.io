@@ -1,0 +1,11 @@
+# Photo captions.
+#
+#   filename | Title | Place | Year | feature
+#
+# Only the filename is required. Add `feature` at the end to let a photo
+# span the full gallery width instead of sitting in one column — good for
+# wide panoramas and for anything you want people to see first.
+#
+# After editing, run:  python3 scripts/build-photos.py
+
+delicate-arch.jpg | Delicate Arch | Arches National Park, Utah | 2024 | feature
