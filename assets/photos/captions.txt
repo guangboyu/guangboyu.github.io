@@ -1,11 +1,13 @@
-# Photo captions.
+# Optional details for the photos in assets/Export/.
 #
-#   filename | Title | Place | Year | feature
+#   Folder/Filename.jpg | Title | Place | Year | feature
 #
-# Only the filename is required. Add `feature` at the end to let a photo
-# span the full gallery width instead of sitting in one column — good for
-# wide panoramas and for anything you want people to see first.
+# Every photo works without a line here: it inherits its section from the
+# folder it sits in, and a filename that is only a camera serial (DSC04249)
+# simply shows no title. Add a line when you want a real title, a place more
+# specific than the folder name, a year, or `feature` to make one photo span
+# the full width of its section.
 #
 # After editing, run:  python3 scripts/build-photos.py
 
-delicate-arch.jpg | Delicate Arch | Arches National Park, Utah | 2024 | feature
+Utah/Delicate_Arch_2024.jpg | Delicate Arch | Arches National Park | 2024 | feature

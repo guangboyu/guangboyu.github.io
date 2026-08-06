@@ -1,4 +1,5 @@
 # Full-resolution photos stay local. Only the resized renditions ship.
+assets/Export/
 assets/photos/originals/
 
 # Agent tooling that landed here from a plugin install. Not part of the site.

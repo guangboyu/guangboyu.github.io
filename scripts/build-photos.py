@@ -1,84 +1,106 @@
 #!/usr/bin/env python3
 """
-Regenerate the photo gallery.
+Regenerate the photo gallery from your Lightroom export.
 
-Drop full-resolution files into  assets/photos/originals/
-then run                        python3 scripts/build-photos.py
+Point it at a folder of folders, one per place:
 
-For each original this writes a display-size copy to assets/photos/large/,
-a smaller one to assets/photos/thumb/, and rebuilds assets/js/photos.js,
-which is what photography.html reads.
+    assets/Export/Alaska/Bear 1.jpg
+    assets/Export/Utah/Delicate_Arch_2024.jpg
+    ...
 
-Captions live in assets/photos/captions.txt, one pipe-separated line per file:
+then run
 
-    delicate-arch.jpg | Delicate Arch | Arches National Park, Utah | 2024 | feature
+    python3 scripts/build-photos.py
 
-Fields after the filename are optional. The trailing `feature` flag makes a
-photo span the full width of the gallery instead of sitting in a column.
-Editing captions.txt and re-running is safe — nothing here is clobbered.
+Each folder becomes a section in the gallery, and the folder name becomes the
+default location shown under every photo in it. For each image this writes a
+2000px display copy and a 900px thumbnail, both as WebP and JPEG, strips EXIF
+including GPS, and rebuilds assets/js/photos.js.
 
-Requires ImageMagick (`convert` and `identify`). No Python packages needed.
+Titles and other details are optional and live in assets/photos/captions.txt,
+keyed by the path inside the export folder:
+
+    Utah/Delicate_Arch_2024.jpg | Delicate Arch | Arches National Park, Utah | 2024 | feature
+
+Fields after the filename are all optional. `feature` makes a photo span the
+full width of its section. Filenames that are only a camera serial (DSC04249)
+get no title, just the place, which reads better than "Dsc04249".
+
+Re-running is cheap: renditions that are already current are skipped, and your
+captions are never touched.
+
+Requires ImageMagick. No Python packages.
 """
 
 from __future__ import annotations
 
 import json
+import re
 import shutil
 import subprocess
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-ORIGINALS = ROOT / "assets" / "photos" / "originals"
+SOURCE = ROOT / "assets" / "Export"
 LARGE = ROOT / "assets" / "photos" / "large"
 THUMB = ROOT / "assets" / "photos" / "thumb"
 CAPTIONS = ROOT / "assets" / "photos" / "captions.txt"
 OUT_JS = ROOT / "assets" / "js" / "photos.js"
 
-# Long-edge pixels and quality for each rendition. WebP is what browsers actually
-# load; the JPEG is a fallback for anything that cannot read it.
 LARGE_EDGE, LARGE_JPG_Q, LARGE_WEBP_Q = 2000, 80, 78
 THUMB_EDGE, THUMB_JPG_Q, THUMB_WEBP_Q = 900, 78, 72
 
 SUFFIXES = {".jpg", ".jpeg", ".png", ".tif", ".tiff", ".webp"}
 
+# Filenames that are just a camera or drone serial carry no meaning worth showing.
+CAMERA_DEFAULT = re.compile(
+    r"^(dsc|dscf|dscn|img|imgp|pict|dji|gopr|gx|pxl|p)[\s_-]*\d+", re.I)
+
 
 def need(binary: str) -> str:
     path = shutil.which(binary)
     if not path:
-        sys.exit(
-            f"error: `{binary}` not found. Install ImageMagick first:\n"
-            f"  sudo apt install imagemagick"
-        )
+        sys.exit(f"error: `{binary}` not found. Install ImageMagick:\n"
+                 f"  sudo apt install imagemagick")
     return path
 
 
-def render(src: Path, dst: Path, edge: int, quality: int) -> None:
-    """Resize src into dst, but only when dst is missing or stale."""
+def slugify(text: str) -> str:
+    text = re.sub(r"[^A-Za-z0-9]+", "-", text).strip("-").lower()
+    return re.sub(r"-{2,}", "-", text) or "photo"
+
+
+def titleize(stem: str) -> str:
+    """A readable title, or empty for camera-default filenames."""
+    if CAMERA_DEFAULT.match(stem.strip()):
+        return ""
+    words = re.sub(r"[_\-]+", " ", stem)
+    words = re.sub(r"\s+", " ", words).strip()
+    words = re.sub(r"\bv\d+(\.\d+)?\b", "", words, flags=re.I).strip()
+    return words[:1].upper() + words[1:] if words else ""
+
+
+def render(src: Path, dst: Path, edge: int, quality: int) -> bool:
     if dst.exists() and dst.stat().st_mtime >= src.stat().st_mtime:
-        return
+        return False
     dst.parent.mkdir(parents=True, exist_ok=True)
     args = [
         need("convert"), str(src),
-        "-auto-orient",          # respect the EXIF rotation flag
-        "-strip",                # drop EXIF, including GPS coordinates
-        "-resize", f"{edge}x{edge}>",   # never upscale
+        "-auto-orient",
+        "-strip",
+        "-resize", f"{edge}x{edge}>",
         "-quality", str(quality),
         "-colorspace", "sRGB",
     ]
-    if dst.suffix == ".webp":
-        args += ["-define", "webp:method=6"]
-    else:
-        args += ["-interlace", "Plane"]   # progressive JPEG
+    args += ["-define", "webp:method=6"] if dst.suffix == ".webp" else ["-interlace", "Plane"]
     subprocess.run(args + [str(dst)], check=True)
-    print(f"  rendered {dst.relative_to(ROOT)}")
+    return True
 
 
 def dimensions(path: Path) -> tuple[int, int]:
-    out = subprocess.run(
-        [need("identify"), "-format", "%w %h", str(path)],
-        check=True, capture_output=True, text=True,
-    ).stdout.split()
+    out = subprocess.run([need("identify"), "-format", "%w %h", str(path)],
+                         check=True, capture_output=True, text=True).stdout.split()
     return int(out[0]), int(out[1])
 
 
@@ -91,70 +113,82 @@ def load_captions() -> dict[str, dict]:
         if not line or line.startswith("#"):
             continue
         parts = [p.strip() for p in line.split("|")]
-        key = parts[0]
-        meta[key] = {
-            "title": parts[1] if len(parts) > 1 else "",
-            "place": parts[2] if len(parts) > 2 else "",
+        meta[parts[0].replace("\\", "/").lower()] = {
+            "title": parts[1] if len(parts) > 1 else None,
+            "place": parts[2] if len(parts) > 2 else None,
             "year": parts[3] if len(parts) > 3 else "",
             "feature": len(parts) > 4 and parts[4].lower() == "feature",
         }
     return meta
 
 
-def titleize(stem: str) -> str:
-    return stem.replace("-", " ").replace("_", " ").strip().title()
-
-
 def main() -> None:
-    if not ORIGINALS.exists():
-        sys.exit(f"error: {ORIGINALS.relative_to(ROOT)} does not exist.")
-
-    originals = sorted(
-        p for p in ORIGINALS.iterdir()
-        if p.is_file() and p.suffix.lower() in SUFFIXES
-    )
-    if not originals:
-        print(f"No photos in {ORIGINALS.relative_to(ROOT)} — writing an empty gallery.")
+    if not SOURCE.exists():
+        sys.exit(f"error: {SOURCE.relative_to(ROOT)} does not exist. Put one folder "
+                 f"per place inside it.")
 
     captions = load_captions()
-    photos = []
+    sections: dict[str, list[dict]] = {}
+    built = 0
 
-    for src in originals:
-        print(f"{src.name}")
-        stem = src.stem
-        thumb = THUMB / f"{stem}.jpg"
-        render(src, LARGE / f"{stem}.jpg",  LARGE_EDGE, LARGE_JPG_Q)
-        render(src, LARGE / f"{stem}.webp", LARGE_EDGE, LARGE_WEBP_Q)
-        render(src, thumb,                  THUMB_EDGE, THUMB_JPG_Q)
-        render(src, THUMB / f"{stem}.webp", THUMB_EDGE, THUMB_WEBP_Q)
+    for folder in sorted(p for p in SOURCE.iterdir() if p.is_dir()):
+        place = folder.name
+        images = sorted(p for p in folder.iterdir()
+                        if p.is_file() and p.suffix.lower() in SUFFIXES)
+        if not images:
+            continue
+        print(f"{place} ({len(images)})")
 
-        w, h = dimensions(thumb)
-        meta = captions.get(src.name) or captions.get(f"{stem}.jpg") or {}
-        photos.append({
-            "src": f"assets/photos/large/{stem}.jpg",
-            "srcWebp": f"assets/photos/large/{stem}.webp",
-            "thumb": f"assets/photos/thumb/{stem}.jpg",
-            "thumbWebp": f"assets/photos/thumb/{stem}.webp",
-            "w": w,
-            "h": h,
-            "title": meta.get("title") or titleize(stem),
-            "place": meta.get("place", ""),
-            "year": meta.get("year", ""),
-            "feature": bool(meta.get("feature")),
-        })
+        for src in images:
+            stem = f"{slugify(place)}-{slugify(src.stem)}"
+            thumb = THUMB / f"{stem}.jpg"
+            for dst, edge, q in (
+                (LARGE / f"{stem}.jpg",  LARGE_EDGE, LARGE_JPG_Q),
+                (LARGE / f"{stem}.webp", LARGE_EDGE, LARGE_WEBP_Q),
+                (thumb,                  THUMB_EDGE, THUMB_JPG_Q),
+                (THUMB / f"{stem}.webp", THUMB_EDGE, THUMB_WEBP_Q),
+            ):
+                built += render(src, dst, edge, q)
 
-    # Newest year first. The sort is stable, so within a year the order stays
-    # whatever captions.txt and the filenames give you.
-    photos.sort(key=lambda p: p["year"] or "", reverse=True)
+            w, h = dimensions(thumb)
+            key = f"{place}/{src.name}".lower()
+            meta = captions.get(key, {})
+            title = meta.get("title")
+            if title is None:
+                title = titleize(src.stem)
 
-    body = json.dumps(photos, indent=2, ensure_ascii=False)
+            sections.setdefault(place, []).append({
+                "src": f"assets/photos/large/{stem}.jpg",
+                "srcWebp": f"assets/photos/large/{stem}.webp",
+                "thumb": f"assets/photos/thumb/{stem}.jpg",
+                "thumbWebp": f"assets/photos/thumb/{stem}.webp",
+                "w": w,
+                "h": h,
+                "group": place,
+                "title": title,
+                "place": meta.get("place") or "",
+                "year": meta.get("year", ""),
+                "feature": bool(meta.get("feature")),
+            })
+
+    if not sections:
+        sys.exit("error: no images found.")
+
+    # Biggest bodies of work first; a section of one photo reads as an afterthought.
+    photos = [p for place in sorted(sections, key=lambda k: (-len(sections[k]), k))
+              for p in sections[place]]
+
     OUT_JS.parent.mkdir(parents=True, exist_ok=True)
     OUT_JS.write_text(
         "/* Generated by scripts/build-photos.py — edit captions.txt, not this file. */\n"
-        f"const PHOTOS = {body};\n",
+        f"const PHOTOS = {json.dumps(photos, indent=2, ensure_ascii=False)};\n",
         encoding="utf-8",
     )
-    print(f"\nWrote {OUT_JS.relative_to(ROOT)} — {len(photos)} photo(s).")
+
+    shipped = sum(f.stat().st_size for d in (LARGE, THUMB) for f in d.iterdir())
+    print(f"\n{len(photos)} photos in {len(sections)} sections, {built} renditions built.")
+    print(f"Shipped weight: {shipped / 1048576:.0f} MB")
+    print(f"Wrote {OUT_JS.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

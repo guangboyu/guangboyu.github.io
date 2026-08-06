@@ -18,32 +18,29 @@
      own heading and its own column block, so a long gallery stays navigable
      instead of running as one endless wall. */
 
-  var years = [];
+  var groups = [];
   photos.forEach(function (p) {
-    var y = p.year || '';
-    if (years.indexOf(y) === -1) years.push(y);
+    var g = p.group || '';
+    if (groups.indexOf(g) === -1) groups.push(g);
   });
-  var grouped = years.length > 1;
+  var grouped = groups.length > 1;
   var container = grid.parentNode;
-  var currentYear = null;
+  var currentGroup = null;
   var target = grid;
 
   photos.forEach(function (photo, i) {
-    if (grouped && photo.year !== currentYear) {
-      currentYear = photo.year;
-      if (target !== grid || target.childNodes.length) {
-        var heading = document.createElement('h2');
-        heading.className = 'gallery-group';
-        heading.textContent = currentYear || 'Undated';
-        container.insertBefore(heading, null);
+    if (grouped && photo.group !== currentGroup) {
+      currentGroup = photo.group;
+      var heading = document.createElement('h2');
+      heading.className = 'gallery-group';
+      heading.textContent = currentGroup;
+      if (target === grid && !target.childNodes.length) {
+        container.insertBefore(heading, grid);
+      } else {
+        container.appendChild(heading);
         target = document.createElement('div');
         target.className = 'gallery';
-        container.insertBefore(target, null);
-      } else {
-        var first = document.createElement('h2');
-        first.className = 'gallery-group';
-        first.textContent = currentYear || 'Undated';
-        container.insertBefore(first, grid);
+        container.appendChild(target);
       }
     }
     var figure = document.createElement('figure');
