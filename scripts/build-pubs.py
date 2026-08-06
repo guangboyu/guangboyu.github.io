@@ -174,14 +174,14 @@ def render_venue(entry: dict) -> str:
 
 
 def badge(entry: dict, my_index: int) -> str:
+    """Only ever from an explicit `role` field. Being listed first already says
+    first author; a badge on top of that reads as trying too hard."""
     role = (entry.get("role") or "").lower()
     if role in ("co-first", "cofirst", "equal"):
         return "Co-first author"
-    if role == "first" or my_index == 0:
+    if role == "first":
         return "First author"
-    if role:
-        return entry["role"]
-    return ""
+    return entry["role"] if role else ""
 
 
 def link_for(entry: dict) -> str:

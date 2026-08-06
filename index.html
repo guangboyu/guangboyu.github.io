@@ -160,7 +160,7 @@
 
     <section class="section">
       <div class="section__head">
-        <h2>Representative Work</h2>
+        <h2>Selected Work</h2>
         <a href="projects.html">All projects &rarr;</a>
       </div>
 
@@ -172,18 +172,20 @@
         <p class="card__body">Pancreatic cancer kills most patients within five years, and what
         separates one prognosis from another is largely the tumor's surroundings: how dense the scar
         tissue is, how many immune cells got through it. Reading that today requires a biopsy, which is
-        invasive, samples one spot, and cannot be repeated often. A CT scan has none of those problems,
-        and every patient already gets one. It just does not, on its own, say anything about the
-        biology.</p>
+        invasive, samples one spot, and cannot be repeated often. A CT or MRI scan has none of those
+        problems, and every patient already gets one. It just does not, on its own, say anything about
+        the biology.</p>
 
-        <p class="card__body">What works is to leave the pretrained vision model frozen and fit a
-        small classical model on top of its embeddings. That beats both hand-crafted radiomics and
+        <p class="card__body">Preclinical and clinical imaging cohorts are small, a few dozen subjects
+        being ordinary rather than exceptional, and that is precisely where fine-tuning a large network
+        overfits. What works instead is to leave the pretrained vision model frozen and fit a small
+        classical model on top of its embeddings. That beats both hand-crafted radiomics and
         fine-tuning the same network end to end, and it recovers the same biology from mouse MRI and
         from human CT.</p>
 
         <figure class="diagram">
-          <svg viewBox="0 0 600 196" role="img"
-               aria-label="Two parallel arms. The mouse arm runs 9.4 tesla MRI through a frozen encoder and a small head to predict immune, fibrosis and survival endpoints, validated against whole-slide IHC. The human arm runs clinical CT through the same steps to the same endpoints, validated against RNA sequencing and proteomics.">
+          <svg viewBox="0 0 600 124" role="img"
+               aria-label="Mouse 9.4 tesla MRI and human clinical CT both feed one pipeline: a frozen encoder, then a machine learning head, predicting immune, fibrosis and survival endpoints.">
             <defs>
               <marker id="dgA" viewBox="0 0 8 8" refX="7" refY="4"
                       markerWidth="6" markerHeight="6" orient="auto">
@@ -192,37 +194,32 @@
               </marker>
             </defs>
 
-            <rect class="dg-box" x="0"   y="18" width="132" height="46" rx="4"/>
-            <rect class="dg-box dg-fill" x="156" y="18" width="132" height="46" rx="4"/>
-            <rect class="dg-box" x="312" y="18" width="132" height="46" rx="4"/>
-            <rect class="dg-box" x="468" y="18" width="132" height="46" rx="4"/>
-            <text class="dg-t" x="66"  y="45" text-anchor="middle">Mouse 9.4T MRI</text>
-            <text class="dg-t" x="222" y="36" text-anchor="middle">frozen encoder</text>
-            <text class="dg-s" x="222" y="52" text-anchor="middle">no fine-tuning</text>
-            <text class="dg-t" x="378" y="45" text-anchor="middle">small head</text>
-            <text class="dg-t" x="534" y="36" text-anchor="middle">immune, fibrosis,</text>
-            <text class="dg-t" x="534" y="52" text-anchor="middle">survival</text>
-            <line class="dg-line" x1="134" y1="41" x2="152" y2="41" marker-end="url(#dgA)"/>
-            <line class="dg-line" x1="290" y1="41" x2="308" y2="41" marker-end="url(#dgA)"/>
-            <line class="dg-line" x1="446" y1="41" x2="464" y2="41" marker-end="url(#dgA)"/>
-            <text class="dg-s" x="0" y="84">validated against whole-slide IHC</text>
+            <!-- two inputs -->
+            <rect class="dg-box" x="0" y="8"  width="140" height="40" rx="4"/>
+            <rect class="dg-box" x="0" y="76" width="140" height="40" rx="4"/>
+            <text class="dg-t" x="70" y="33"  text-anchor="middle">Mouse 9.4T MRI</text>
+            <text class="dg-t" x="70" y="101" text-anchor="middle">Human clinical CT</text>
 
-            <rect class="dg-box" x="0"   y="120" width="132" height="46" rx="4"/>
-            <rect class="dg-box dg-fill" x="156" y="120" width="132" height="46" rx="4"/>
-            <rect class="dg-box" x="312" y="120" width="132" height="46" rx="4"/>
-            <rect class="dg-box" x="468" y="120" width="132" height="46" rx="4"/>
-            <text class="dg-t" x="66"  y="147" text-anchor="middle">Human clinical CT</text>
-            <text class="dg-t" x="222" y="138" text-anchor="middle">frozen encoder</text>
-            <text class="dg-s" x="222" y="154" text-anchor="middle">no fine-tuning</text>
-            <text class="dg-t" x="378" y="147" text-anchor="middle">small head</text>
-            <text class="dg-t" x="534" y="147" text-anchor="middle">same endpoints</text>
-            <line class="dg-line" x1="134" y1="143" x2="152" y2="143" marker-end="url(#dgA)"/>
-            <line class="dg-line" x1="290" y1="143" x2="308" y2="143" marker-end="url(#dgA)"/>
-            <line class="dg-line" x1="446" y1="143" x2="464" y2="143" marker-end="url(#dgA)"/>
-            <text class="dg-s" x="0" y="186">validated against RNA-seq and proteomics</text>
+            <!-- converging into one stream -->
+            <path class="dg-line" d="M142 28 H162 V62"/>
+            <path class="dg-line" d="M142 96 H162 V62"/>
+            <line class="dg-line" x1="162" y1="62" x2="178" y2="62" marker-end="url(#dgA)"/>
+
+            <!-- shared pipeline -->
+            <rect class="dg-box dg-fill" x="180" y="42" width="130" height="40" rx="4"/>
+            <rect class="dg-box" x="330" y="42" width="130" height="40" rx="4"/>
+            <rect class="dg-box" x="480" y="42" width="120" height="40" rx="4"/>
+            <text class="dg-t" x="245" y="59" text-anchor="middle">frozen encoder</text>
+            <text class="dg-s" x="245" y="74" text-anchor="middle">no fine-tuning</text>
+            <text class="dg-t" x="395" y="59" text-anchor="middle">machine learning</text>
+            <text class="dg-t" x="395" y="74" text-anchor="middle">head</text>
+            <text class="dg-t" x="540" y="59" text-anchor="middle">immune, fibrosis,</text>
+            <text class="dg-t" x="540" y="74" text-anchor="middle">survival</text>
+            <line class="dg-line" x1="310" y1="62" x2="328" y2="62" marker-end="url(#dgA)"/>
+            <line class="dg-line" x1="460" y1="62" x2="478" y2="62" marker-end="url(#dgA)"/>
           </svg>
-          <figcaption>One pipeline, run in both species, each validated against its own gold
-          standard.</figcaption>
+          <figcaption>One pipeline for both species, each validated against its own tissue and
+          molecular ground truth.</figcaption>
         </figure>
 
         <div class="table-scroll">
@@ -240,8 +237,7 @@
 
         <p class="card__body">On the human side the imaging score predicts survival even after
         adjusting for age, stage, and grade, which is the test that decides whether a biomarker adds
-        anything to what a clinician already knows. Each trained model is under 100&nbsp;KB and scores
-        a scan in under a second.</p>
+        anything to what a clinician already knows.</p>
       </article>
 
       <article class="card">
@@ -268,7 +264,6 @@
         <p class="links">
           <a href="https://github.com/guangboyu/vqa-rlvr">Code</a>
           <a href="https://huggingface.co/omnifish123">Adapters</a>
-          <a href="https://wandb.ai/ygbuestc-uci/vqa-rlvr">Training runs</a>
         </p>
       </article>
     </section>
@@ -286,17 +281,16 @@
       <article class="card">
         <h3 class="card__title">Tencent QTrade, NLP Engineer</h3>
         <p class="card__meta">2020 to 2022</p>
-        <p class="card__body">Named-entity recognition for a brokerage chat platform. Replaced an LSTM
-        pipeline with an ALBERT-based model (macro-F1 77 to 88), served it under 100&nbsp;ms at p95 on
-        CPU, and rolled it out by canary from 5% of users to all of them. Led two engineers and two
-        annotators through the migration.</p>
+        <p class="card__body">Named-entity recognition for a brokerage chat platform. I led the
+        migration from an LSTM pipeline to an ALBERT-based model (macro-F1 77 to 88), served under
+        100&nbsp;ms at p95 on CPU and rolled out by canary from 5% of users to all of them.</p>
       </article>
 
       <article class="card">
         <h3 class="card__title">University of Southern California</h3>
         <p class="card__meta">2015 to 2017</p>
-        <p class="card__body">MS, Computer Science. BS in Software Engineering from UESTC before
-        that.</p>
+        <p class="card__body">MS, Computer Science. BS in Software Engineering from the University of
+        Electronic Science and Technology of China before that.</p>
       </article>
     </section>
 
