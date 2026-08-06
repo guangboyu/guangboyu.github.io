@@ -80,18 +80,28 @@ Re-running is safe and produces identical output, so it is fine to run on every 
 
 ## Adding photos
 
-1. Copy full-resolution files into `assets/photos/originals/`. Name them the way you want
-   the URL to read: `mono-lake-dawn.jpg`, not `DSC04182.jpg`.
-2. Describe them in `assets/photos/captions.txt`, one line each:
+1. Put full-resolution files in `assets/Export/`, **one folder per place**:
 
    ```
-   mono-lake-dawn.jpg | Mono Lake at dawn | Mono County, California | 2025
-   delicate-arch.jpg  | Delicate Arch | Arches National Park, Utah | 2024 | feature
+   assets/Export/Alaska/Bear 1.jpg
+   assets/Export/Utah/Delicate_Arch_2024.jpg
    ```
 
-   Only the filename is required. Adding `feature` at the end makes a photo span the full
-   gallery width instead of sitting in one column, which suits panoramas and whichever
-   shot you want seen first.
+   Each folder becomes a section in the gallery. Filenames can contain spaces; the
+   published URLs are slugified (`alaska-bear-1.jpg`).
+
+2. Captions are optional and off by default. Photos show no text at all, because the
+   section heading already says where they were taken. Add a line to
+   `assets/photos/captions.txt` only for a photo that deserves one:
+
+   ```
+   Utah/Delicate_Arch_2024.jpg | Delicate Arch | Arches National Park | 2024
+   Utah/Double_Arch_2024.jpg   | | | | feature
+   ```
+
+   The fields are `Folder/Filename | Title | Place | Year | feature`, all optional after
+   the filename. `feature` makes a photo span the full width of its section, which suits
+   panoramas and whichever frame should be seen first.
 
 3. Run the build:
 
@@ -109,10 +119,15 @@ Re-running is safe and produces identical output, so it is fine to run on every 
    1 GB ceiling sits somewhere north of 700 photos. 100 photos is about 125 MB and takes
    roughly five minutes to build the first time; after that only new files are processed.
 
-**Photos group by year automatically.** Once more than one year is present, each gets a
-heading and its own block, so a long gallery reads as sections rather than one endless
-column. Newest year first; within a year the order follows `captions.txt`. With a single
-year present, no headings appear.
+**Sections come from the folders.** Each place gets a heading and its own block, so a
+long gallery reads as sections rather than one endless column. Largest section first;
+within a section, files are in name order. With only one folder present, no heading
+appears.
+
+**To remove a photo**, delete it from `assets/Export/` and re-run the build. The manifest
+regenerates without it, though its old renditions stay behind in `large/` and `thumb/` —
+the script does not prune orphans yet. Deleting both folders and rebuilding takes about
+twenty minutes for a library this size.
 
 Requires ImageMagick (`sudo apt install imagemagick`). Nothing else.
 

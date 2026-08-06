@@ -10,4 +10,4 @@
 #
 # After editing, run:  python3 scripts/build-photos.py
 
-Utah/Delicate_Arch_2024.jpg | Delicate Arch | Arches National Park | 2024 | feature
+Utah/Delicate_Arch_2024.jpg | | | | feature

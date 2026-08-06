@@ -8,7 +8,7 @@ const PHOTOS = [
     "w": 900,
     "h": 506,
     "group": "Alaska",
-    "title": "Bear 1",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -21,7 +21,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Alaska",
-    "title": "Bear 2",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -34,7 +34,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Alaska",
-    "title": "Ciwei",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -47,7 +47,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Alaska",
-    "title": "Cruser Glacier 1",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -60,7 +60,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Alaska",
-    "title": "Cruser Glacier 2",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -242,7 +242,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Alaska",
-    "title": "Deer 1",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -255,7 +255,7 @@ const PHOTOS = [
     "w": 720,
     "h": 900,
     "group": "Alaska",
-    "title": "Deer 43",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -268,7 +268,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Alaska",
-    "title": "Denali 1",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -281,7 +281,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Alaska",
-    "title": "Denali 2",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -294,7 +294,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Alaska",
-    "title": "Denali 3",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -307,7 +307,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Alaska",
-    "title": "Denali 4",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -320,7 +320,7 @@ const PHOTOS = [
     "w": 900,
     "h": 506,
     "group": "Alaska",
-    "title": "Denali 5",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -333,7 +333,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Alaska",
-    "title": "Denali 6",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -346,7 +346,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Alaska",
-    "title": "Denali 7",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -359,7 +359,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Alaska",
-    "title": "Denali 8",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -372,7 +372,7 @@ const PHOTOS = [
     "w": 900,
     "h": 506,
     "group": "Alaska",
-    "title": "Denali Close 16 9",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -385,7 +385,7 @@ const PHOTOS = [
     "w": 900,
     "h": 720,
     "group": "Alaska",
-    "title": "Denali Overlook",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -398,7 +398,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Alaska",
-    "title": "Eagle",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -411,7 +411,7 @@ const PHOTOS = [
     "w": 900,
     "h": 377,
     "group": "Alaska",
-    "title": "Kenai Fjords National Park Glacier",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -424,7 +424,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Alaska",
-    "title": "Matanuska Glacier 1",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -437,7 +437,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Alaska",
-    "title": "Matanuska Glacier 3",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -450,7 +450,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Alaska",
-    "title": "Matanuska Glacier 4",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -463,7 +463,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Alaska",
-    "title": "Reflection Lake Mountain",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -476,7 +476,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Alaska",
-    "title": "Seward Highway 1",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -489,7 +489,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Alaska",
-    "title": "Seward Highway 1 2",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -502,7 +502,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Alaska",
-    "title": "Seward Highway 1 3",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -515,7 +515,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Alaska",
-    "title": "Wolf",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -528,7 +528,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Utah",
-    "title": "Bryce Snow",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -671,7 +671,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Utah",
-    "title": "DeadHorse",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -684,9 +684,9 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Utah",
-    "title": "Delicate Arch",
-    "place": "Arches National Park",
-    "year": "2024",
+    "title": "",
+    "place": "",
+    "year": "",
     "feature": true
   },
   {
@@ -697,7 +697,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Utah",
-    "title": "Double Arch 2024",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -710,7 +710,7 @@ const PHOTOS = [
     "w": 900,
     "h": 506,
     "group": "Utah",
-    "title": "Factory Butt 2024",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -723,7 +723,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Utah",
-    "title": "Moon Overlook 1 2024",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -736,7 +736,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Utah",
-    "title": "Moon Overlook 2 2024",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -749,7 +749,7 @@ const PHOTOS = [
     "w": 900,
     "h": 506,
     "group": "Utah",
-    "title": "Moon Overlook 3 2024",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -762,7 +762,7 @@ const PHOTOS = [
     "w": 900,
     "h": 506,
     "group": "Utah",
-    "title": "Sal Mountain 2024",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -775,7 +775,7 @@ const PHOTOS = [
     "w": 900,
     "h": 506,
     "group": "Utah",
-    "title": "Utah 2025 06",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -788,7 +788,7 @@ const PHOTOS = [
     "w": 900,
     "h": 506,
     "group": "Utah",
-    "title": "Utah 2025 09",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -801,7 +801,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Utah",
-    "title": "Utah 2025 10",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -814,7 +814,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Utah",
-    "title": "Utah 2025 12",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -827,7 +827,7 @@ const PHOTOS = [
     "w": 900,
     "h": 506,
     "group": "Utah",
-    "title": "Utah 2025 13",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -840,7 +840,7 @@ const PHOTOS = [
     "w": 600,
     "h": 900,
     "group": "Utah",
-    "title": "Utah 2025 14",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -853,7 +853,7 @@ const PHOTOS = [
     "w": 900,
     "h": 506,
     "group": "Utah",
-    "title": "Utah 2025 15",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -866,7 +866,7 @@ const PHOTOS = [
     "w": 900,
     "h": 506,
     "group": "Utah",
-    "title": "Utah 2025 17",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -879,7 +879,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Utah",
-    "title": "Angleslanding 1",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -892,7 +892,7 @@ const PHOTOS = [
     "w": 688,
     "h": 900,
     "group": "Utah",
-    "title": "Arch milk way 2",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -905,7 +905,7 @@ const PHOTOS = [
     "w": 900,
     "h": 407,
     "group": "Utah",
-    "title": "Grand canyon 3",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -918,7 +918,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Utah",
-    "title": "Horseshoe 1",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -931,7 +931,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Utah",
-    "title": "Mesa 2",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -944,7 +944,7 @@ const PHOTOS = [
     "w": 638,
     "h": 900,
     "group": "Utah",
-    "title": "Milky way 1",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -957,7 +957,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Utah",
-    "title": "Sunrise6",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -970,7 +970,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Utah",
-    "title": "Sunrise 2",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -983,7 +983,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Utah",
-    "title": "Virgin 1",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -996,7 +996,7 @@ const PHOTOS = [
     "w": 600,
     "h": 900,
     "group": "Colorado",
-    "title": "Aspen 1",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1009,7 +1009,7 @@ const PHOTOS = [
     "w": 900,
     "h": 720,
     "group": "Colorado",
-    "title": "Beef Sunrise 5 4",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1022,7 +1022,7 @@ const PHOTOS = [
     "w": 720,
     "h": 900,
     "group": "Colorado",
-    "title": "Cabin at G Pass",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1035,7 +1035,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Colorado",
-    "title": "Capitol Creek Sunset",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1048,7 +1048,7 @@ const PHOTOS = [
     "w": 900,
     "h": 506,
     "group": "Colorado",
-    "title": "Carrion Ridge",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1061,7 +1061,7 @@ const PHOTOS = [
     "w": 900,
     "h": 506,
     "group": "Colorado",
-    "title": "Castle Sunrise",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1074,7 +1074,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Colorado",
-    "title": "Ceremony",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1087,7 +1087,7 @@ const PHOTOS = [
     "w": 900,
     "h": 506,
     "group": "Colorado",
-    "title": "Cow",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1100,7 +1100,7 @@ const PHOTOS = [
     "w": 900,
     "h": 615,
     "group": "Colorado",
-    "title": "Crystal Lake",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1113,7 +1113,7 @@ const PHOTOS = [
     "w": 705,
     "h": 900,
     "group": "Colorado",
-    "title": "DPC1",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1126,7 +1126,7 @@ const PHOTOS = [
     "w": 720,
     "h": 900,
     "group": "Colorado",
-    "title": "Fern Kepler Pass",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1139,7 +1139,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Colorado",
-    "title": "Golden Memories Along the Million Dollar Highway",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1152,7 +1152,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Colorado",
-    "title": "Guanella Pass Drone 1",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1165,7 +1165,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Colorado",
-    "title": "Guanella Pass Drone 2",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1178,7 +1178,7 @@ const PHOTOS = [
     "w": 900,
     "h": 675,
     "group": "Colorado",
-    "title": "Guanella Pass Drone",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1191,7 +1191,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Colorado",
-    "title": "Jeep",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1204,7 +1204,7 @@ const PHOTOS = [
     "w": 900,
     "h": 720,
     "group": "Colorado",
-    "title": "Man",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1217,7 +1217,7 @@ const PHOTOS = [
     "w": 900,
     "h": 506,
     "group": "Colorado",
-    "title": "Maroon Bell Sunrise",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1230,7 +1230,7 @@ const PHOTOS = [
     "w": 720,
     "h": 900,
     "group": "Colorado",
-    "title": "MaroonBellMilkyway",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1243,7 +1243,7 @@ const PHOTOS = [
     "w": 600,
     "h": 900,
     "group": "Colorado",
-    "title": "Reflections of Gold Aspens Near Telluride",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1256,7 +1256,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Colorado",
-    "title": "Road Mountain",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1269,7 +1269,7 @@ const PHOTOS = [
     "w": 900,
     "h": 675,
     "group": "Colorado",
-    "title": "Silverton Drone",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1282,7 +1282,7 @@ const PHOTOS = [
     "w": 900,
     "h": 506,
     "group": "Colorado",
-    "title": "Telephone",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1295,7 +1295,7 @@ const PHOTOS = [
     "w": 900,
     "h": 506,
     "group": "Colorado",
-    "title": "Wilson Peak Sunrise",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1308,7 +1308,7 @@ const PHOTOS = [
     "w": 900,
     "h": 431,
     "group": "Hawaii",
-    "title": "Alkl(overview)",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1321,7 +1321,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Hawaii",
-    "title": "Bay 1",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1334,7 +1334,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Hawaii",
-    "title": "Bay 2",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1347,7 +1347,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Hawaii",
-    "title": "Bay 4",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1360,7 +1360,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Hawaii",
-    "title": "Beach",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1373,7 +1373,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Hawaii",
-    "title": "Flower",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1386,7 +1386,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Hawaii",
-    "title": "Grass",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1399,7 +1399,7 @@ const PHOTOS = [
     "w": 900,
     "h": 329,
     "group": "Hawaii",
-    "title": "Megma",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1412,7 +1412,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Hawaii",
-    "title": "Megma 2",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1425,7 +1425,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Hawaii",
-    "title": "Oceanview",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1438,7 +1438,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Hawaii",
-    "title": "Road",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1451,7 +1451,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Hawaii",
-    "title": "Volcano 1",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1529,7 +1529,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Los Angeles",
-    "title": "EL1",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1542,7 +1542,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Los Angeles",
-    "title": "Chino 1",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1555,7 +1555,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Los Angeles",
-    "title": "Laguna2",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1568,7 +1568,7 @@ const PHOTOS = [
     "w": 900,
     "h": 303,
     "group": "Los Angeles",
-    "title": "White",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1581,7 +1581,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Yosemite",
-    "title": "Bigsur 2",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1594,7 +1594,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Yosemite",
-    "title": "Halfdome",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1607,7 +1607,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Yosemite",
-    "title": "Monolake",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1620,7 +1620,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Yosemite",
-    "title": "Monolake sunrise",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1633,7 +1633,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Yosemite",
-    "title": "Silverlake",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1646,7 +1646,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Yosemite",
-    "title": "Tunnelview 2",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1659,7 +1659,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Yosemite",
-    "title": "Valleyview 2",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1685,7 +1685,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Sequoia",
-    "title": "Photo Jun 07 2025, 4 29 31 PM",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1698,7 +1698,7 @@ const PHOTOS = [
     "w": 900,
     "h": 675,
     "group": "Sequoia",
-    "title": "Photo Jun 07 2025, 4 38 53 PM",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1711,7 +1711,7 @@ const PHOTOS = [
     "w": 900,
     "h": 675,
     "group": "Sequoia",
-    "title": "Photo Jun 07 2025, 6 14 36 PM",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1724,7 +1724,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Sequoia",
-    "title": "Sunset 1",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1737,7 +1737,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Sequoia",
-    "title": "Sunset 2 Social",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1750,7 +1750,7 @@ const PHOTOS = [
     "w": 900,
     "h": 398,
     "group": "Yellowstone",
-    "title": "Oxbow bend",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1763,7 +1763,7 @@ const PHOTOS = [
     "w": 900,
     "h": 506,
     "group": "Yellowstone",
-    "title": "Fall",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1776,7 +1776,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Yellowstone",
-    "title": "Grand p",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1789,7 +1789,7 @@ const PHOTOS = [
     "w": 900,
     "h": 364,
     "group": "Yellowstone",
-    "title": "House",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1802,7 +1802,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Yellowstone",
-    "title": "Landing",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1815,7 +1815,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Yellowstone",
-    "title": "Spring",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1828,7 +1828,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Oregon",
-    "title": "Mt Hood",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1841,7 +1841,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Oregon",
-    "title": "T Lake 2",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1854,7 +1854,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Oregon",
-    "title": "Bandonbeach",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1867,7 +1867,7 @@ const PHOTOS = [
     "w": 900,
     "h": 238,
     "group": "Oregon",
-    "title": "Crater pano sunrise",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1880,7 +1880,7 @@ const PHOTOS = [
     "w": 702,
     "h": 900,
     "group": "Oregon",
-    "title": "Fall",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1893,7 +1893,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Joshua Tree",
-    "title": "Cap Rock Sunset 1",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1906,7 +1906,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Joshua Tree",
-    "title": "Cap Rock Sunset 2",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1919,7 +1919,7 @@ const PHOTOS = [
     "w": 900,
     "h": 600,
     "group": "Joshua Tree",
-    "title": "Cap Rock Sunset 3",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1932,7 +1932,7 @@ const PHOTOS = [
     "w": 900,
     "h": 506,
     "group": "Joshua Tree",
-    "title": "Skull Rock Milky Way 1",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1945,7 +1945,7 @@ const PHOTOS = [
     "w": 900,
     "h": 224,
     "group": "Seattle",
-    "title": "Hurrican ridge",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1958,7 +1958,7 @@ const PHOTOS = [
     "w": 900,
     "h": 506,
     "group": "Seattle",
-    "title": "Night",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1971,7 +1971,7 @@ const PHOTOS = [
     "w": 900,
     "h": 297,
     "group": "Seattle",
-    "title": "Rainier",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false
@@ -1984,7 +1984,7 @@ const PHOTOS = [
     "w": 900,
     "h": 601,
     "group": "Death Valley",
-    "title": "Z POINT",
+    "title": "",
     "place": "",
     "year": "",
     "feature": false

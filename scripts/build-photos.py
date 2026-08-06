@@ -53,9 +53,6 @@ THUMB_EDGE, THUMB_JPG_Q, THUMB_WEBP_Q = 900, 78, 72
 
 SUFFIXES = {".jpg", ".jpeg", ".png", ".tif", ".tiff", ".webp"}
 
-# Filenames that are just a camera or drone serial carry no meaning worth showing.
-CAMERA_DEFAULT = re.compile(
-    r"^(dsc|dscf|dscn|img|imgp|pict|dji|gopr|gx|pxl|p)[\s_-]*\d+", re.I)
 
 
 def need(binary: str) -> str:
@@ -69,16 +66,6 @@ def need(binary: str) -> str:
 def slugify(text: str) -> str:
     text = re.sub(r"[^A-Za-z0-9]+", "-", text).strip("-").lower()
     return re.sub(r"-{2,}", "-", text) or "photo"
-
-
-def titleize(stem: str) -> str:
-    """A readable title, or empty for camera-default filenames."""
-    if CAMERA_DEFAULT.match(stem.strip()):
-        return ""
-    words = re.sub(r"[_\-]+", " ", stem)
-    words = re.sub(r"\s+", " ", words).strip()
-    words = re.sub(r"\bv\d+(\.\d+)?\b", "", words, flags=re.I).strip()
-    return words[:1].upper() + words[1:] if words else ""
 
 
 def render(src: Path, dst: Path, edge: int, quality: int) -> bool:
@@ -153,9 +140,6 @@ def main() -> None:
             w, h = dimensions(thumb)
             key = f"{place}/{src.name}".lower()
             meta = captions.get(key, {})
-            title = meta.get("title")
-            if title is None:
-                title = titleize(src.stem)
 
             sections.setdefault(place, []).append({
                 "src": f"assets/photos/large/{stem}.jpg",
@@ -165,7 +149,7 @@ def main() -> None:
                 "w": w,
                 "h": h,
                 "group": place,
-                "title": title,
+                "title": meta.get("title") or "",
                 "place": meta.get("place") or "",
                 "year": meta.get("year", ""),
                 "feature": bool(meta.get("feature")),

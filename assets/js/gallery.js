@@ -5,6 +5,12 @@
 
   var photos = (typeof PHOTOS !== 'undefined' && PHOTOS) || [];
 
+  /* Most photos carry no caption, so fall back to the section name for alt text
+     rather than leaving a screen reader with nothing. */
+  function describe(photo) {
+    return [photo.title, photo.place || photo.group].filter(Boolean).join(', ');
+  }
+
   if (!photos.length) {
     grid.outerHTML =
       '<p class="gallery-empty">No photos yet. Drop files into ' +
@@ -53,7 +59,7 @@
 
     var img = document.createElement('img');
     img.src = photo.thumb;
-    img.alt = photo.title + (photo.place ? ', ' + photo.place : '');
+    img.alt = describe(photo);
     img.width = photo.w;
     img.height = photo.h;
     img.loading = i < 2 ? 'eager' : 'lazy';
@@ -112,8 +118,8 @@
     var photo = photos[index];
     if (boxSource) boxSource.srcset = photo.srcWebp || photo.src;
     boxImg.src = photo.src;
-    boxImg.alt = photo.title + (photo.place ? ', ' + photo.place : '');
-    boxCap.textContent = [photo.title, photo.place, photo.year]
+    boxImg.alt = describe(photo);
+    boxCap.textContent = [photo.title, photo.place || photo.group, photo.year]
       .filter(Boolean).join(' · ');
   }
 
