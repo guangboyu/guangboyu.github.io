@@ -25,29 +25,43 @@
      instead of running as one endless wall. */
 
   var groups = [];
+  var counts = {};
   photos.forEach(function (p) {
     var g = p.group || '';
     if (groups.indexOf(g) === -1) groups.push(g);
+    counts[g] = (counts[g] || 0) + 1;
   });
+
   var grouped = groups.length > 1;
   var container = grid.parentNode;
   var currentGroup = null;
   var target = grid;
 
+  if (grouped) container.removeChild(grid);
+
   photos.forEach(function (photo, i) {
     if (grouped && photo.group !== currentGroup) {
       currentGroup = photo.group;
-      var heading = document.createElement('h2');
-      heading.className = 'gallery-group';
-      heading.textContent = currentGroup;
-      if (target === grid && !target.childNodes.length) {
-        container.insertBefore(heading, grid);
-      } else {
-        container.appendChild(heading);
-        target = document.createElement('div');
-        target.className = 'gallery';
-        container.appendChild(target);
-      }
+
+      var fold = document.createElement('details');
+      fold.className = 'fold';
+      fold.open = groups.indexOf(currentGroup) === 0;  // first place open, rest collapsed
+
+      var summary = document.createElement('summary');
+      summary.className = 'gallery-group';
+      var name = document.createElement('span');
+      name.textContent = currentGroup;
+      var count = document.createElement('span');
+      count.className = 'fold__count';
+      count.textContent = counts[currentGroup];
+      summary.appendChild(name);
+      summary.appendChild(count);
+
+      target = document.createElement('div');
+      target.className = 'gallery';
+      fold.appendChild(summary);
+      fold.appendChild(target);
+      container.appendChild(fold);
     }
     var figure = document.createElement('figure');
     figure.className = 'shot' + (photo.feature ? ' shot--feature' : '');
