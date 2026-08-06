@@ -116,6 +116,7 @@ def main() -> None:
 
     captions = load_captions()
     sections: dict[str, list[dict]] = {}
+    keep: set[str] = set()
     built = 0
 
     for folder in sorted(p for p in SOURCE.iterdir() if p.is_dir()):
@@ -136,6 +137,7 @@ def main() -> None:
                 (THUMB / f"{stem}.webp", THUMB_EDGE, THUMB_WEBP_Q),
             ):
                 built += render(src, dst, edge, q)
+                keep.add(str(dst.relative_to(ROOT)))
 
             w, h = dimensions(thumb)
             key = f"{place}/{src.name}".lower()
@@ -158,6 +160,16 @@ def main() -> None:
     if not sections:
         sys.exit("error: no images found.")
 
+    # Drop renditions whose source is gone, so removing a photo from Export/ is
+    # enough to remove it from the site.
+    pruned = 0
+    for folder in (LARGE, THUMB):
+        for f in sorted(folder.iterdir()):
+            if f.is_file() and str(f.relative_to(ROOT)) not in keep:
+                f.unlink()
+                pruned += 1
+                print(f"  pruned {f.relative_to(ROOT)}")
+
     # Biggest bodies of work first; a section of one photo reads as an afterthought.
     photos = [p for place in sorted(sections, key=lambda k: (-len(sections[k]), k))
               for p in sections[place]]
@@ -170,7 +182,8 @@ def main() -> None:
     )
 
     shipped = sum(f.stat().st_size for d in (LARGE, THUMB) for f in d.iterdir())
-    print(f"\n{len(photos)} photos in {len(sections)} sections, {built} renditions built.")
+    print(f"\n{len(photos)} photos in {len(sections)} sections, "
+          f"{built} renditions built, {pruned} pruned.")
     print(f"Shipped weight: {shipped / 1048576:.0f} MB")
     print(f"Wrote {OUT_JS.relative_to(ROOT)}")
 
