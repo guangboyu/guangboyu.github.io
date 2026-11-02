@@ -148,6 +148,24 @@ a:hover { color: var(--accent); }
   background: color-mix(in srgb, var(--accent) 16%, transparent);
 }
 
+/* Narrow screens: name and theme button on one row, the nav as a single row
+   under them (scrolling sideways if it ever runs out of room) instead of wrapping. */
+@media (max-width: 48em) {
+  .topbar__in { flex-wrap: wrap; row-gap: .35rem; padding-block: .6rem .45rem; }
+  .wordmark { order: 1; font-size: 1.2rem; }
+  .icon-btn { order: 2; }
+  .nav {
+    order: 3; flex: 1 0 100%; flex-wrap: nowrap; gap: 0;
+    overflow-x: auto; scrollbar-width: none; margin-inline: -.5rem;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a { padding: .35rem .55rem; font-size: .875rem; white-space: nowrap; }
+}
+@media (max-width: 30em) {
+  .nav { justify-content: space-between; }
+  .nav a { padding: .35rem .4rem; font-size: .8125rem; }
+}
+
 .icon-btn {
   display: grid; place-items: center; width: 2.25rem; height: 2.25rem;
   border: 1px solid var(--n200); border-radius: .5rem; background: var(--card);
@@ -382,7 +400,100 @@ table.results tbody tr.is-key td:first-child { font-weight: 600; }
 .lightbox__nav--prev { left: .25rem; top: 50%; transform: translateY(-50%); }
 .lightbox__nav--next { right: .25rem; top: 50%; transform: translateY(-50%); }
 
-/* ---------- 9. Footer ---------- */
+/* ---------- 9. Blog posts ---------- */
+
+/* One reading column, no sidebar: posts carry code, math and wide tables. */
+.post { max-width: 46rem; margin-inline: auto; padding-block: clamp(2rem, 5vw, 3.25rem) 4rem; }
+
+.post-back { font-size: .875rem; font-weight: 500; margin-bottom: 1.5rem; }
+.post-kicker {
+  font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--accent-deep); margin-bottom: .6rem;
+}
+.post-title { font-size: clamp(1.75rem, 4.5vw, 2.4rem); letter-spacing: -0.02em; line-height: 1.18; }
+.post-dek { margin-top: .9rem; font-size: 1.125rem; color: var(--n500); }
+.post-meta { margin-top: .9rem; font-size: .875rem; color: var(--n400); }
+.post-head { padding-bottom: 1.75rem; border-bottom: 1px solid var(--n200); }
+
+.post-toc {
+  margin-top: 1.75rem; padding: 1rem 1.25rem;
+  background: var(--n100); border-radius: var(--radius); font-size: .9375rem;
+}
+.post-toc p { font-weight: 600; color: var(--n800); margin-bottom: .4rem; }
+.post-toc ol { margin: 0; padding-left: 1.25rem; columns: 2; column-gap: 2rem; color: var(--n400); }
+.post-toc li { padding: .1rem 0; break-inside: avoid; }
+@media (max-width: 36em) { .post-toc ol { columns: 1; } }
+
+.post-body { margin-top: 2rem; font-size: 1.0625rem; line-height: 1.75; color: var(--n700); }
+.post-body p { margin-bottom: 1.1em; }
+.post-body h2 { font-size: 1.6rem; letter-spacing: -0.015em; margin: 2.75rem 0 .9rem;
+  scroll-margin-top: 5rem; }
+.post-body h3 { font-family: var(--font-sans); font-weight: 600; font-size: 1.0625rem;
+  margin: 2.1rem 0 .5rem; scroll-margin-top: 5rem; }
+.post-body strong { color: var(--n900); font-weight: 600; }
+.post-body a {
+  text-decoration: underline; text-underline-offset: 2px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.post-body a:hover { text-decoration-color: currentColor; }
+.post-body ul, .post-body ol { margin: 0 0 1.1em; padding-left: 1.35rem; }
+.post-body ul { list-style: disc; }
+.post-body ol { list-style: decimal; }
+.post-body li { margin: .35rem 0; }
+.post-body li::marker { color: var(--n400); }
+
+.post-body code {
+  font-family: var(--font-mono); font-size: .84em;
+  background: var(--n100); border-radius: .3rem; padding: .1em .35em;
+}
+.post-body pre {
+  margin: 1.1rem 0 1.4rem; padding: .95rem 1.1rem; overflow-x: auto;
+  background: var(--n100); border: 1px solid var(--n200); border-radius: var(--radius);
+  font-size: .8125rem; line-height: 1.6;
+}
+.post-body pre code { background: none; padding: 0; font-size: inherit; color: var(--n800); }
+
+.post-body math { font-family: "Noto Sans Math", "STIX Two Math", "Cambria Math", math; }
+.post-body math[display="block"] {
+  display: block; margin: 1.3rem 0; font-size: 1.1em;
+  overflow-x: auto; overflow-y: hidden; padding-block: .25rem;
+}
+
+/* Figures are drawn on white, so they sit on a white plate in both themes. */
+.post-fig { margin: 1.75rem 0; }
+.post-fig img {
+  width: 100%; background: #fff; padding: .6rem;
+  border: 1px solid var(--n200); border-radius: var(--radius);
+}
+.post-fig figcaption { margin-top: .65rem; font-size: .875rem; line-height: 1.55; color: var(--n500); }
+
+.post-body .table-scroll { margin: 1.5rem 0; }
+table.post-table {
+  border-collapse: collapse; min-width: 44rem;
+  font-size: .8125rem; line-height: 1.5;
+}
+table.post-table th, table.post-table td {
+  text-align: left; vertical-align: top; padding: .55rem .9rem .55rem 0;
+  border-bottom: 1px solid var(--n200);
+}
+table.post-table th {
+  font-weight: 600; color: var(--n400); font-size: .72rem;
+  letter-spacing: .06em; text-transform: uppercase;
+}
+table.post-table td { color: var(--n600); }
+table.post-table td:first-child { color: var(--n900); font-weight: 500; }
+
+.post-body .takeaway {
+  margin: 1.4rem 0 1.6rem; padding: .85rem 1.1rem;
+  border-left: 3px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  border-radius: 0 .5rem .5rem 0;
+}
+
+.post-body hr { border: 0; border-top: 1px solid var(--n200); margin: 2.5rem 0 1.25rem; }
+.post-body hr.post-end ~ p { font-size: .875rem; color: var(--n500); }
+
+/* ---------- 10. Footer ---------- */
 
 .site-foot {
   border-top: 1px solid var(--n200);
@@ -391,10 +502,10 @@ table.results tbody tr.is-key td:first-child { font-weight: 600; }
   display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1.5rem;
 }
 
-/* ---------- 10. Print ---------- */
+/* ---------- 11. Print ---------- */
 
 @media print {
-  .topbar, .rail, .site-foot, .lightbox { display: none; }
+  .topbar, .rail, .site-foot, .lightbox, .post-toc, .post-back { display: none; }
   .layout { grid-template-columns: 1fr; }
   body { background: #fff; color: #000; font-size: 10.5pt; }
   .card { break-inside: avoid; border-color: #ddd; }

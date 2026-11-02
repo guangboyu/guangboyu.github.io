@@ -12,6 +12,9 @@ look, so there is nothing to install or upgrade.
 index.html             About, with the sidebar and representative work
 publications.html      Papers, generated from publications.bib
 projects.html          Code and work outside the papers
+blog.html              Post list, generated from blog/*.md
+blog/<slug>.md         A post (Markdown); blog/<slug>.html is generated from it
+blog/img/              Post figures
 photography.html       Gallery, generated from assets/js/photos.js
 publications.bib       The publication list you actually edit
 assets/css/style.css   The whole design system, one file
@@ -75,6 +78,47 @@ Write `*text*` for italics, which is how the species name in the *Clostridium no
 title is set. Use `and others` in the author list to render "et al.".
 
 Re-running is safe and produces identical output, so it is fine to run on every edit.
+
+---
+
+## Writing a blog post
+
+Write the post as `blog/<slug>.md`, starting with a front-matter block:
+
+```
+---
+title: What are you rewarding? A practical guide to ...
+summary: One sentence, shown under the title and in the post list.
+date: 2026-11-02
+topic: Reward design in medical imaging
+---
+```
+
+then run:
+
+```bash
+python3 scripts/build-blog.py
+```
+
+It writes `blog/<slug>.html`, rewrites the list between the `POSTS:START` and `POSTS:END`
+markers in `blog.html`, and adds the post to `sitemap.xml`. Edit the Markdown, never the
+generated page.
+
+The body is ordinary Markdown. `$...$` and `$$...$$` become MathML, so equations render
+with no JavaScript (the page loads Noto Sans Math for the glyphs). Pipe tables scroll
+sideways on phones. Each `## heading` lands in the contents box at the top. A paragraph
+that starts with `**What to do:**` is set as a callout. Figures go in `blog/img/`, written
+as an image followed on the next line by an italic caption:
+
+```
+![Alt text describing the figure.](img/<slug>-figure.webp)
+*Figure 1. Caption.*
+```
+
+Convert PNG figures to lossless WebP first, which cuts them to about a third:
+`convert in.png -alpha off -define webp:lossless=true blog/img/out.webp`.
+
+Requires pandoc (`sudo apt install pandoc`). The generated pages need nothing at runtime.
 
 ---
 
