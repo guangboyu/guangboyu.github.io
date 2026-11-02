@@ -169,70 +169,41 @@
         <p class="card__meta">Pancreatic cancer, mouse 9.4T MRI and patient CT.
         <i>eBioMedicine</i>, in press.</p>
 
-        <p class="card__body">What separates one pancreatic-cancer prognosis from another is the
-        tissue around the tumor, and reading it today takes a biopsy. One frozen foundation model with
-        a small classifier on top predicts the same immune and stromal biomarkers from mouse MRI and
-        from the CT every patient already gets.</p>
+        <p class="card__body">Reading a pancreatic tumor's immune and stromal makeup takes a biopsy
+        today. We asked whether one imaging pipeline can read it from mouse MRI and from the CT
+        patients already get.</p>
 
-        <figure class="diagram">
-          <svg viewBox="0 0 600 210" role="img"
-               aria-label="A mouse MRI slice and a patient CT slice, each with the tumor outlined, feed one pipeline: a frozen encoder (DINOv3, MedSAM), then a small classifier, predicting immune and stromal biomarkers and survival.">
-            <defs>
-              <marker id="dgA" viewBox="0 0 8 8" refX="7" refY="4"
-                      markerWidth="6" markerHeight="6" orient="auto">
-                <path d="M0 1 L7 4 L0 7" fill="none" stroke="currentColor"
-                      stroke-opacity="0.45" stroke-width="1.1"/>
-              </marker>
-              <clipPath id="dgMouse"><rect x="0" y="2" width="150" height="99.5" rx="4"/></clipPath>
-              <clipPath id="dgPatient"><rect x="0" y="108.5" width="150" height="99.5" rx="4"/></clipPath>
-            </defs>
-
-            <image href="assets/img/pdac-mouse-mri.webp" x="0" y="2" width="150" height="99.5"
-                   preserveAspectRatio="xMidYMid slice" clip-path="url(#dgMouse)"/>
-            <image href="assets/img/pdac-patient-ct.webp" x="0" y="108.5" width="150" height="99.5"
-                   preserveAspectRatio="xMidYMax slice" clip-path="url(#dgPatient)"/>
-            <text class="dg-t dg-on-image" x="7" y="17">mouse MRI</text>
-            <text class="dg-t dg-on-image" x="7" y="123.5">patient CT</text>
-
-            <path class="dg-line" d="M152 52 H168 V104"/>
-            <path class="dg-line" d="M152 158 H168 V104"/>
-            <line class="dg-line" x1="168" y1="104" x2="186" y2="104" marker-end="url(#dgA)"/>
-
-            <rect class="dg-box dg-fill" x="188" y="84" width="124" height="40" rx="4"/>
-            <rect class="dg-box" x="332" y="84" width="124" height="40" rx="4"/>
-            <rect class="dg-box" x="472" y="84" width="128" height="40" rx="4"/>
-            <text class="dg-t" x="250" y="100" text-anchor="middle">frozen encoder</text>
-            <text class="dg-s" x="250" y="115" text-anchor="middle">DINOv3, MedSAM</text>
-            <text class="dg-t" x="394" y="100" text-anchor="middle">small classifier</text>
-            <text class="dg-s" x="394" y="115" text-anchor="middle">no fine-tuning</text>
-            <text class="dg-t" x="536" y="100" text-anchor="middle">immune, stroma,</text>
-            <text class="dg-t" x="536" y="115" text-anchor="middle">survival</text>
-            <line class="dg-line" x1="314" y1="104" x2="330" y2="104" marker-end="url(#dgA)"/>
-            <line class="dg-line" x1="458" y1="104" x2="470" y2="104" marker-end="url(#dgA)"/>
-          </svg>
-          <figcaption>One pipeline for both species: mouse predictions are checked against
-          whole-tumor histology, patient predictions against proteogenomics.</figcaption>
+        <figure class="media media--plate media--narrow">
+          <img src="assets/img/pdac-methods.webp" width="1400" height="1274" loading="lazy"
+               alt="Methods. Mouse: KPC-derived tumors in 4 treatment arms, imaged with weekly 9.4 T MRI (169 sessions). Human: the CPTAC-PDA cohort, contrast-enhanced abdominal CT. Both go through frozen foundation-model encoders (DINOv3, MedSAM and others), then classical classifiers (LogReg, SVM, RF, XGBoost). Mouse predictions are evaluated against histology and survival with leave-one-mouse-out cross-validation; human predictions against proteogenomics and survival with patient-grouped 5-fold cross-validation.">
         </figure>
 
-        <div class="stats">
-          <p class="stat"><b>0.94–0.96</b><span>AUROC on mouse MRI, against 0.63 when
-          fine-tuned</span></p>
-          <p class="stat"><b>0.78–0.86</b><span>AUROC on patient CT, against 0.70 when
-          fine-tuned</span></p>
-          <p class="stat"><b>0.61 &rarr; 0.73</b><span>Survival C-index, age, stage and grade
-          alone, then with the CT score</span></p>
+        <div class="table-scroll">
+          <table class="results results--wide">
+            <thead>
+              <tr><th scope="col">Biomarker</th><th scope="col">Mouse MRI</th><th scope="col">Patient CT</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>CD8 infiltration<small>CD8 density (IHC) &middot; CD8A protein</small></td><td>0.94</td><td>0.81</td></tr>
+              <tr><td>Stromal collagen<small>trichrome collagen &middot; COL1A1 protein</small></td><td>0.96</td><td>0.78</td></tr>
+              <tr><td>CD8:CD68 balance<small>CD8:CD68 density &middot; CD8A:macrophage protein</small></td><td>0.94</td><td>0.86</td></tr>
+              <tr><td>Antitumor response<small>treatment-response score &middot; cytolytic activity (RNA)</small></td><td>0.95</td><td>0.80</td></tr>
+            </tbody>
+          </table>
         </div>
+        <p class="table-note">AUROC per biomarker, each against its own ground truth (mouse &middot;
+        patient). Fine-tuning the same network end to end peaked at 0.63 and 0.70.</p>
 
-        <figure class="media pair">
-          <div class="pair__row">
-            <img src="assets/img/pdac-attention-mouse.webp" width="900" height="562" loading="lazy"
-                 style="flex-grow: 1.6" alt="Mouse MRI with the tumor outlined in yellow and the model's attention concentrated inside it.">
-            <img src="assets/img/pdac-attention-patient.webp" width="700" height="609" loading="lazy"
-                 style="flex-grow: 1.15" alt="Patient CT with the pancreatic tumor outlined in yellow, an enlarged inset, and the model's attention concentrated inside it.">
-          </div>
-          <figcaption>Where the frozen encoder looks, in a mouse and in a patient with a high
-          CD8:macrophage balance: inside the tumor, outlined in yellow.</figcaption>
+        <figure class="media media--plate media--narrow">
+          <img src="assets/img/pdac-cindex.webp" width="1600" height="489" loading="lazy"
+               alt="Survival concordance index in patients: clinical variables (age, stage, grade) 0.61; imaging score 0.69; clinical plus imaging 0.73.">
+          <figcaption>Added value over clinical staging, in patients: the CT score stays prognostic
+          after adjusting for age, stage and grade (HR 1.87 per SD).</figcaption>
         </figure>
+
+        <p class="card__takeaway">Mouse MRI, checked against whole-tumor histology, can nominate CT
+        biomarkers that turn a routine scan into a noninvasive readout of tumor immunity and
+        stroma.</p>
       </article>
 
       <article class="card">
