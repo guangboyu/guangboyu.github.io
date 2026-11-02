@@ -241,6 +241,7 @@ a:hover { color: var(--accent); }
 .section__head a { font-size: .875rem; font-weight: 500; white-space: nowrap; }
 
 .page-title { font-size: 2rem; letter-spacing: -0.02em; }
+.page-title + .section { margin-top: 1.5rem; }
 .lede { margin-top: .6rem; color: var(--n500); max-width: 44rem; }
 
 .prose { color: var(--n600); }
@@ -286,7 +287,7 @@ a:hover { color: var(--accent); }
 
 /* ---------- 6. Diagrams ---------- */
 
-.diagram { margin: 1.15rem 0 0; overflow-x: auto; }
+.diagram { margin: 1.15rem 0 0; overflow-x: auto; padding: 1px; }  /* room for edge strokes */
 .diagram svg {
   width: 100%; min-width: 30rem; height: auto; display: block; color: var(--n700);
   overflow: visible;   /* keeps the outer box strokes at the viewBox edge */
@@ -299,6 +300,8 @@ a:hover { color: var(--accent); }
 .dg-fill { fill: var(--accent); fill-opacity: .1; stroke: none; }
 .dg-t    { fill: currentColor; font-family: var(--font-sans); font-size: 12px; }
 .dg-s    { fill: currentColor; fill-opacity: .62; font-family: var(--font-sans); font-size: 10.5px; }
+.dg-on-image { fill: #fff; stroke: #000; stroke-width: 3px; stroke-opacity: .55;
+  paint-order: stroke; font-weight: 600; }
 
 /* Screenshots and screen recordings */
 .media { margin: 1.15rem 0 0; }
@@ -307,6 +310,26 @@ a:hover { color: var(--accent); }
   background: var(--n100);
 }
 .media figcaption { margin-top: .6rem; font-size: .8125rem; color: var(--n500); }
+
+/* Images shown side by side at one height: each image's flex-grow is its aspect ratio. */
+.pair__row { display: flex; gap: .5rem; }
+.pair__row img { flex-basis: 0; min-width: 0; width: 100%; height: auto;
+  border-radius: .5rem; border: 0; background: #000; }
+
+/* Headline numbers */
+.stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: .6rem; margin-top: 1.15rem;
+}
+.stat {
+  margin: 0; padding: .75rem .9rem; border: 1px solid var(--n200);
+  border-radius: .6rem; background: var(--bg);
+}
+.stat b {
+  display: block; font-family: var(--font-serif); font-size: 1.5rem; line-height: 1.2;
+  color: var(--n900); font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.stat span { display: block; margin-top: .25rem; font-size: .8125rem; line-height: 1.45; color: var(--n500); }
 /* Paper figures are drawn on white; keep them on a white plate in both themes. */
 .media--plate img { background: #fff; padding: .5rem; }
 

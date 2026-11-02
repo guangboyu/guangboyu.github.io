@@ -166,78 +166,73 @@
 
       <article class="card">
         <h3 class="card__title">Reading tumor biology from a scan the patient already gets</h3>
-        <p class="card__meta">Cross-species study of pancreatic cancer, mouse 9.4T MRI and human
-        clinical CT. <i>eBioMedicine</i>, in press.</p>
+        <p class="card__meta">Pancreatic cancer, mouse 9.4T MRI and patient CT.
+        <i>eBioMedicine</i>, in press.</p>
 
-        <p class="card__body">Pancreatic cancer kills most patients within five years, and what
-        separates one prognosis from another is largely the tumor's surroundings: how dense the scar
-        tissue is, how many immune cells got through it. Reading that today requires a biopsy, which is
-        invasive, samples one spot, and cannot be repeated often. A CT or MRI scan has none of those
-        problems, and every patient already gets one. It just does not, on its own, say anything about
-        the biology.</p>
-
-        <p class="card__body">Preclinical and clinical imaging cohorts are small, a few dozen subjects
-        being ordinary rather than exceptional, and that is precisely where fine-tuning a large network
-        overfits. What works instead is to leave the pretrained vision model frozen and fit a small
-        classical model on top of its embeddings. That beats both hand-crafted radiomics and
-        fine-tuning the same network end to end, and it recovers the same biology from mouse MRI and
-        from human CT.</p>
+        <p class="card__body">What separates one pancreatic-cancer prognosis from another is the
+        tissue around the tumor, and reading it today takes a biopsy. One frozen foundation model with
+        a small classifier on top predicts the same immune and stromal biomarkers from mouse MRI and
+        from the CT every patient already gets.</p>
 
         <figure class="diagram">
-          <svg viewBox="0 0 600 124" role="img"
-               aria-label="Mouse 9.4 tesla MRI and human clinical CT both feed one pipeline: a frozen encoder, then a machine learning head, predicting immune, fibrosis and survival endpoints.">
+          <svg viewBox="0 0 600 210" role="img"
+               aria-label="A mouse MRI slice and a patient CT slice, each with the tumor outlined, feed one pipeline: a frozen encoder (DINOv3, MedSAM), then a small classifier, predicting immune and stromal biomarkers and survival.">
             <defs>
               <marker id="dgA" viewBox="0 0 8 8" refX="7" refY="4"
                       markerWidth="6" markerHeight="6" orient="auto">
                 <path d="M0 1 L7 4 L0 7" fill="none" stroke="currentColor"
                       stroke-opacity="0.45" stroke-width="1.1"/>
               </marker>
+              <clipPath id="dgMouse"><rect x="0" y="2" width="150" height="99.5" rx="4"/></clipPath>
+              <clipPath id="dgPatient"><rect x="0" y="108.5" width="150" height="99.5" rx="4"/></clipPath>
             </defs>
 
-            <!-- two inputs -->
-            <rect class="dg-box" x="0" y="8"  width="140" height="40" rx="4"/>
-            <rect class="dg-box" x="0" y="76" width="140" height="40" rx="4"/>
-            <text class="dg-t" x="70" y="33"  text-anchor="middle">Mouse 9.4T MRI</text>
-            <text class="dg-t" x="70" y="101" text-anchor="middle">Human clinical CT</text>
+            <image href="assets/img/pdac-mouse-mri.webp" x="0" y="2" width="150" height="99.5"
+                   preserveAspectRatio="xMidYMid slice" clip-path="url(#dgMouse)"/>
+            <image href="assets/img/pdac-patient-ct.webp" x="0" y="108.5" width="150" height="99.5"
+                   preserveAspectRatio="xMidYMax slice" clip-path="url(#dgPatient)"/>
+            <text class="dg-t dg-on-image" x="7" y="17">mouse MRI</text>
+            <text class="dg-t dg-on-image" x="7" y="123.5">patient CT</text>
 
-            <!-- converging into one stream -->
-            <path class="dg-line" d="M142 28 H162 V62"/>
-            <path class="dg-line" d="M142 96 H162 V62"/>
-            <line class="dg-line" x1="162" y1="62" x2="178" y2="62" marker-end="url(#dgA)"/>
+            <path class="dg-line" d="M152 52 H168 V104"/>
+            <path class="dg-line" d="M152 158 H168 V104"/>
+            <line class="dg-line" x1="168" y1="104" x2="186" y2="104" marker-end="url(#dgA)"/>
 
-            <!-- shared pipeline -->
-            <rect class="dg-box dg-fill" x="180" y="42" width="130" height="40" rx="4"/>
-            <rect class="dg-box" x="330" y="42" width="130" height="40" rx="4"/>
-            <rect class="dg-box" x="480" y="42" width="120" height="40" rx="4"/>
-            <text class="dg-t" x="245" y="59" text-anchor="middle">frozen encoder</text>
-            <text class="dg-s" x="245" y="74" text-anchor="middle">no fine-tuning</text>
-            <text class="dg-t" x="395" y="59" text-anchor="middle">machine learning</text>
-            <text class="dg-t" x="395" y="74" text-anchor="middle">head</text>
-            <text class="dg-t" x="540" y="59" text-anchor="middle">immune, fibrosis,</text>
-            <text class="dg-t" x="540" y="74" text-anchor="middle">survival</text>
-            <line class="dg-line" x1="310" y1="62" x2="328" y2="62" marker-end="url(#dgA)"/>
-            <line class="dg-line" x1="460" y1="62" x2="478" y2="62" marker-end="url(#dgA)"/>
+            <rect class="dg-box dg-fill" x="188" y="84" width="124" height="40" rx="4"/>
+            <rect class="dg-box" x="332" y="84" width="124" height="40" rx="4"/>
+            <rect class="dg-box" x="472" y="84" width="128" height="40" rx="4"/>
+            <text class="dg-t" x="250" y="100" text-anchor="middle">frozen encoder</text>
+            <text class="dg-s" x="250" y="115" text-anchor="middle">DINOv3, MedSAM</text>
+            <text class="dg-t" x="394" y="100" text-anchor="middle">small classifier</text>
+            <text class="dg-s" x="394" y="115" text-anchor="middle">no fine-tuning</text>
+            <text class="dg-t" x="536" y="100" text-anchor="middle">immune, stroma,</text>
+            <text class="dg-t" x="536" y="115" text-anchor="middle">survival</text>
+            <line class="dg-line" x1="314" y1="104" x2="330" y2="104" marker-end="url(#dgA)"/>
+            <line class="dg-line" x1="458" y1="104" x2="470" y2="104" marker-end="url(#dgA)"/>
           </svg>
-          <figcaption>One pipeline for both species, each validated against its own tissue and
-          molecular ground truth.</figcaption>
+          <figcaption>One pipeline for both species: mouse predictions are checked against
+          whole-tumor histology, patient predictions against proteogenomics.</figcaption>
         </figure>
 
-        <div class="table-scroll">
-          <table class="results">
-            <thead>
-              <tr><th scope="col">Approach</th><th scope="col">Mouse MRI</th><th scope="col">Human CT</th></tr>
-            </thead>
-            <tbody>
-              <tr class="is-key"><td>Frozen encoder, small head</td><td>0.94–0.96</td><td>0.78–0.86</td></tr>
-              <tr><td>Same network, fine-tuned</td><td>0.63</td><td>0.70</td></tr>
-            </tbody>
-          </table>
+        <div class="stats">
+          <p class="stat"><b>0.94–0.96</b><span>AUROC on mouse MRI, against 0.63 when
+          fine-tuned</span></p>
+          <p class="stat"><b>0.78–0.86</b><span>AUROC on patient CT, against 0.70 when
+          fine-tuned</span></p>
+          <p class="stat"><b>0.61 &rarr; 0.73</b><span>Survival C-index, age, stage and grade
+          alone, then with the CT score</span></p>
         </div>
-        <p class="table-note">AUROC across the matched biological endpoints.</p>
 
-        <p class="card__body">On the human side the imaging score predicts survival even after
-        adjusting for age, stage, and grade, which is the test that decides whether a biomarker adds
-        anything to what a clinician already knows.</p>
+        <figure class="media pair">
+          <div class="pair__row">
+            <img src="assets/img/pdac-attention-mouse.webp" width="900" height="562" loading="lazy"
+                 style="flex-grow: 1.6" alt="Mouse MRI with the tumor outlined in yellow and the model's attention concentrated inside it.">
+            <img src="assets/img/pdac-attention-patient.webp" width="700" height="609" loading="lazy"
+                 style="flex-grow: 1.15" alt="Patient CT with the pancreatic tumor outlined in yellow, an enlarged inset, and the model's attention concentrated inside it.">
+          </div>
+          <figcaption>Where the frozen encoder looks, in a mouse and in a patient with a high
+          CD8:macrophage balance: inside the tumor, outlined in yellow.</figcaption>
+        </figure>
       </article>
 
       <article class="card">
