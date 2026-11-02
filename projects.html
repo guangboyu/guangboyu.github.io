@@ -61,9 +61,6 @@
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><text x="12" y="15.8" text-anchor="middle"
           font-size="9.5" font-weight="700" font-family="Inter, sans-serif" fill="currentColor" stroke="none">iD</text></svg>
       </a>
-      <a href="https://huggingface.co/omnifish123" aria-label="Hugging Face" title="Hugging Face">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.4 14.3c.9 1.2 2.1 1.8 3.6 1.8s2.7-.6 3.6-1.8"/><circle cx="9" cy="10" r=".7" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r=".7" fill="currentColor" stroke="none"/></svg>
-      </a>
       <a href="https://500px.com/p/ygbuestc?view=photos" aria-label="500px" title="Photography on 500px">
         <svg viewBox="0 0 24 24"><path d="M3 8h3l1.5-2h9L18 8h3v11H3z"/><circle cx="12" cy="13" r="3.4"/></svg>
       </a>
@@ -73,7 +70,7 @@
       <h2>Built with</h2>
       <ul>
         <li>PyTorch, Hugging Face, TRL</li>
-        <li>QLoRA, GRPO, LoRA</li>
+        <li>LoRA, QLoRA, GRPO, vLLM</li>
         <li>FAISS, ONNX, FastAPI</li>
         <li>PyRadiomics, MONAI</li>
       </ul>
@@ -83,54 +80,59 @@
   <main id="main">
 
     <h1 class="page-title">Projects</h1>
-    <p class="lede">Work outside the papers. Each links to the code, so the numbers can be checked
-    rather than taken on trust.</p>
+    <p class="lede">Work outside the papers. Where the code is public it is linked, so the numbers
+    can be checked rather than taken on trust.</p>
 
     <section class="section">
       <div class="section__head"><h2>Personal Work</h2></div>
 
       <article class="card">
-        <h3 class="card__title">VQA-RLVR: post-training a vision-language model, and auditing the
-        benchmark</h3>
-        <p class="card__meta">QLoRA supervised fine-tuning followed by GRPO on Qwen3-VL, evaluated on
-        VQAv2, GQA, CLEVR, and TextVQA. &nbsp;<span class="stamp">2026</span></p>
+        <h3 class="card__title">VQA-RLVR: what reinforcement learning adds to a vision-language
+        model</h3>
+        <p class="card__meta">Qwen3-VL at 2B and 8B, trained with SFT, with GRPO on a 0/1 correctness
+        reward, and with SFT then GRPO, on photo, chart, and medical questions.
+        &nbsp;<span class="stamp">2026</span></p>
 
-        <p class="card__body">The system answers questions about images, and is trained to work
-        through them step by step rather than guess from the picture alone. Training runs in two
-        stages: supervised fine-tuning on question and answer pairs, then reinforcement learning where
-        the only reward is whether the final answer turns out to be right. That lifts accuracy on the
-        questions that need reasoning, and the gain carries to a benchmark the model never saw in
-        training.</p>
+        <p class="card__body">Reinforcement learning with a verifiable reward is now the standard step
+        after supervised fine-tuning for language models. For vision-language models it is less clear
+        that it adds anything, because most visual questions are answered by looking rather than
+        deriving. This project runs that comparison under one recipe and scores every model through
+        one harness, built to tell a real gain from a change in answer format, and use of the image
+        from answers learned without it.</p>
 
         <div class="table-scroll">
           <table class="results">
             <thead>
               <tr>
-                <th scope="col">Reasoning mode</th>
-                <th scope="col">VQAv2</th>
-                <th scope="col">GQA</th>
-                <th scope="col">TextVQA (unseen)</th>
+                <th scope="col">Test set</th>
+                <th scope="col">Base</th>
+                <th scope="col">SFT</th>
+                <th scope="col">GRPO</th>
+                <th scope="col">SFT &rarr; GRPO</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>Zero-shot</td><td>64.9</td><td>51.9</td><td>70.2</td></tr>
-              <tr class="is-key"><td>After GRPO</td><td>69.5</td><td>53.9</td><td>72.7</td></tr>
+              <tr class="is-key"><td>ChartQA</td><td>69.7</td><td>66.2</td><td>80.1</td><td>79.8</td></tr>
+              <tr><td>SLAKE (8B)</td><td>58.1</td><td>77.2</td><td>68.3</td><td>78.2</td></tr>
+              <tr><td>TextVQA (unseen)</td><td>80.5</td><td>80.1</td><td>81.0</td><td>80.9</td></tr>
             </tbody>
           </table>
         </div>
-        <p class="table-note">Qwen3-VL-2B, full evaluation sets. Total cost: nothing in GPU time,
-        19 cents for the judge.</p>
+        <p class="table-note">Accuracy (%), Qwen3-VL-2B unless marked; base is the released Instruct
+        model. ChartQA is answered step by step; SLAKE is medical; no model trained on TextVQA. The
+        full matrix, with 95% intervals, is in the report.</p>
 
-        <p class="card__body">The more interesting result was about the scoring. Exact match calls an
-        answer wrong whenever the wording differs, and an LLM judge showed that between 23% and 49% of
-        those failures were correct answers. That matters because the field reports a penalty for
-        letting models think out loud, and once the grading is fixed, most of that penalty is not
-        there. A second surprise pointed the same way: training on synthetic CLEVR alone, with no
-        natural images at all, produced the largest gain on unseen data and damaged nothing.</p>
+        <p class="card__body">RL wins where reasoning pays: on charts it keeps its reasoning and lands
+        about ten points above every short-answer model. On medical images fine-tuning teaches the
+        domain's answers, and RL started from the fine-tuned model is the best in every setting. RL's
+        gains also need the image. With a black image in its place, the RL model answers no more
+        questions than the base model in five of six settings, while fine-tuning answers up to 24
+        points more. Pointed at two 3D CT benchmarks, the same harness found most of their published
+        accuracy reachable without the scan; with those shortcuts removed, RL and fine-tuning tie.</p>
 
         <p class="links">
           <a href="https://github.com/guangboyu/vqa-rlvr">Code</a>
-          <a href="https://huggingface.co/omnifish123">Adapters</a>
+          <a href="https://guangboyu.github.io/vqa-rlvr/report/">Report</a>
         </p>
       </article>
 
@@ -211,7 +213,6 @@
         the parameters. The lesson that transferred to later work came from the data mix. Without
         temperature-weighted sampling the largest corpus took 96.5% of every batch and drowned the
         specialist sets; at T&nbsp;=&nbsp;0.5 that fell to 79%.</p>
-        <p class="links"><a href="https://huggingface.co/omnifish123">Models and demo</a></p>
       </article>
     </section>
 

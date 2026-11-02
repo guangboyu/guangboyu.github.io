@@ -43,7 +43,6 @@
     "https://scholar.google.com/citations?user=pDd1pLEAAAAJ",
     "https://github.com/guangboyu",
     "https://orcid.org/0009-0001-9675-1129",
-    "https://huggingface.co/omnifish123",
     "https://500px.com/p/ygbuestc"
   ]
 }
@@ -98,9 +97,6 @@
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><text x="12" y="15.8" text-anchor="middle"
           font-size="9.5" font-weight="700" font-family="Inter, sans-serif" fill="currentColor" stroke="none">iD</text></svg>
       </a>
-      <a href="https://huggingface.co/omnifish123" aria-label="Hugging Face" title="Hugging Face">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.4 14.3c.9 1.2 2.1 1.8 3.6 1.8s2.7-.6 3.6-1.8"/><circle cx="9" cy="10" r=".7" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r=".7" fill="currentColor" stroke="none"/></svg>
-      </a>
       <a href="https://500px.com/p/ygbuestc?view=photos" aria-label="500px" title="Photography on 500px">
         <svg viewBox="0 0 24 24"><path d="M3 8h3l1.5-2h9L18 8h3v11H3z"/><circle cx="12" cy="13" r="3.4"/></svg>
       </a>
@@ -121,6 +117,7 @@
       <h2>Links</h2>
       <ul>
         <li><a href="assets/resume/Guangbo_Yu_Resume.pdf">Curriculum vitae (PDF)</a></li>
+        <li><a href="mailto:guangboy@uci.edu">guangboy@uci.edu</a></li>
         <li><a href="mailto:ygbusc@gmail.com">ygbusc@gmail.com</a></li>
       </ul>
     </div>
@@ -141,15 +138,17 @@
         rather than biology. My PhD is about closing that gap with models pretrained elsewhere, so that
         the biology is what gets learned here, not the representation.</p>
 
-        <p>The same problem turns up outside medicine. Training a vision-language model with
-        reinforcement learning, I watched it stop reasoning out loud. The reward was exact-match
-        accuracy, reasoning made the phrasing drift, and saying less scored better. The model had read
-        the incentive correctly and the incentive was wrong: auditing the grader showed that between a
-        quarter and half of the answers it marked wrong were right.</p>
+        <p>A version of the same question comes up outside medicine: is the model using the image, or
+        something easier? Post-training a vision-language model, I compared reinforcement learning
+        against plain supervised fine-tuning on the same data. RL earns its place where reasoning pays,
+        about ten points on chart questions, and its gains mostly vanish when the image is blacked out,
+        as they should. Fine-tuning's partly survive: the model has learned answers it can give without
+        looking. Applied to two 3D CT benchmarks, the same test showed that most of their published
+        accuracy was reachable without the scan.</p>
 
         <p>Both lines of work arrive at the same place. A number is worth what you checked it against,
         which is why the medical models are held against stained tissue and the language models
-        against a second reader.</p>
+        against a blacked-out image.</p>
 
         <p>Before the PhD I spent two years as an NLP engineer at Tencent QTrade, building named-entity
         models for a brokerage chat platform with more than 500,000 daily users. That is where I learned
@@ -167,7 +166,7 @@
       <article class="card">
         <h3 class="card__title">Reading tumor biology from a scan the patient already gets</h3>
         <p class="card__meta">Cross-species study of pancreatic cancer, mouse 9.4T MRI and human
-        clinical CT. &nbsp;<span class="stamp">Under review</span></p>
+        clinical CT. <i>eBioMedicine</i>, in press.</p>
 
         <p class="card__body">Pancreatic cancer kills most patients within five years, and what
         separates one prognosis from another is largely the tumor's surroundings: how dense the scar
@@ -252,18 +251,19 @@
       </article>
 
       <article class="card">
-        <h3 class="card__title">When the reward teaches a model to stop thinking</h3>
-        <p class="card__meta">Post-training Qwen3-VL with reinforcement learning from verifiable
-        rewards. Open source.</p>
-        <p class="card__body">Rewarded purely on exact-match accuracy, the model learned to drop its
-        chain-of-thought, keeping it in 17% of answers. That was the correct response to the incentive:
-        reasoning makes the phrasing drift, and drift is scored as error. A small format reward brings
-        the reasoning back at no cost to accuracy. The deeper problem was the grader itself, and a
-        19-cent audit found that between 23% and 49% of the answers it marked wrong were correct.
-        Judged properly, the widely reported penalty for reasoning out loud mostly is not there.</p>
+        <h3 class="card__title">What reinforcement learning adds to a vision-language model</h3>
+        <p class="card__meta">Qwen3-VL at 2B and 8B, supervised fine-tuning against RL from verifiable
+        rewards, on photo, chart, and medical questions. Open source.</p>
+        <p class="card__body">RL wins where reasoning pays: on chart questions it keeps its
+        step-by-step reasoning and goes from 69.7% to 80.1%, about ten points above every short-answer
+        model. Its gains also need the image. With a black image in place of the real one, the RL model
+        answers no more questions than the base model in five of six settings, while supervised
+        fine-tuning answers up to 24 points more, having learned answers it can give without looking.
+        Pointed at two 3D CT benchmarks, the same checks found most of their published accuracy
+        reachable without the scan.</p>
         <p class="links">
           <a href="https://github.com/guangboyu/vqa-rlvr">Code</a>
-          <a href="https://huggingface.co/omnifish123">Adapters</a>
+          <a href="https://guangboyu.github.io/vqa-rlvr/report/">Report</a>
         </p>
       </article>
     </section>
