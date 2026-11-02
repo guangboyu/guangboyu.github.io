@@ -249,6 +249,14 @@
         segments the tumor and predicts response together. Both are checked against the tissue rather
         than against a held-out split alone: the imaging measures track histology at
         r&nbsp;=&nbsp;0.94, and predicted cell death lands within 0.013 RMSE of the stain.</p>
+
+        <figure class="media media--plate">
+          <a href="assets/img/hcc-multitask-design.webp"><img src="assets/img/hcc-multitask-design.webp" width="1800" height="921" loading="lazy"
+               alt="Study design in three panels: rats with implanted liver tumors receive sorafenib and NK-cell therapy; T1-weighted, T2-weighted and contrast-enhanced MRI are acquired; a U-Net++ network with an EfficientNet-B0 backbone segments the tumor and predicts treatment response, and its outputs are correlated with histology."></a>
+          <figcaption>Study design of the <i>Diagnostics</i> paper: one network segments the tumor and
+          predicts response from MRI, and its outputs are checked against histology. Figure&nbsp;1 of
+          <a href="https://doi.org/10.3390/diagnostics15222844">Yu et al., 2025</a>, CC&nbsp;BY&nbsp;4.0.</figcaption>
+        </figure>
       </article>
 
       <article class="card">
@@ -263,6 +271,50 @@
         give without looking.
         Pointed at two 3D CT benchmarks, the same checks found most of their published accuracy
         reachable without the scan.</p>
+
+        <figure class="diagram">
+          <svg viewBox="0 0 600 142" role="img"
+               aria-label="Pipeline in four stages: pinned data with every test image hashed out of the training pools; a dataset screen that keeps only data where the image matters and RL gets a signal; three training arms, SFT, GRPO, and SFT then GRPO; and scoring every model on nine test sets with two prompts. One evaluation harness, built before any training, drives both the screen and the scoring.">
+            <defs>
+              <marker id="dgC" viewBox="0 0 8 8" refX="7" refY="4"
+                      markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0 1 L7 4 L0 7" fill="none" stroke="currentColor"
+                      stroke-opacity="0.45" stroke-width="1.1"/>
+              </marker>
+            </defs>
+
+            <rect class="dg-box" x="0"   y="8" width="132" height="60" rx="4"/>
+            <rect class="dg-box" x="156" y="8" width="132" height="60" rx="4"/>
+            <rect class="dg-box" x="312" y="8" width="132" height="60" rx="4"/>
+            <rect class="dg-box" x="468" y="8" width="132" height="60" rx="4"/>
+
+            <text class="dg-t" x="66"  y="30" text-anchor="middle">pinned data</text>
+            <text class="dg-s" x="66"  y="46" text-anchor="middle">frozen test sets,</text>
+            <text class="dg-s" x="66"  y="59" text-anchor="middle">test images kept out</text>
+            <text class="dg-t" x="222" y="30" text-anchor="middle">dataset screen</text>
+            <text class="dg-s" x="222" y="46" text-anchor="middle">image must matter,</text>
+            <text class="dg-s" x="222" y="59" text-anchor="middle">RL must get a signal</text>
+            <text class="dg-t" x="378" y="30" text-anchor="middle">train three arms</text>
+            <text class="dg-s" x="378" y="46" text-anchor="middle">SFT, GRPO,</text>
+            <text class="dg-s" x="378" y="59" text-anchor="middle">SFT then GRPO</text>
+            <text class="dg-t" x="534" y="30" text-anchor="middle">score every model</text>
+            <text class="dg-s" x="534" y="46" text-anchor="middle">9 test sets,</text>
+            <text class="dg-s" x="534" y="59" text-anchor="middle">2 prompts each</text>
+
+            <line class="dg-line" x1="134" y1="38" x2="152" y2="38" marker-end="url(#dgC)"/>
+            <line class="dg-line" x1="290" y1="38" x2="308" y2="38" marker-end="url(#dgC)"/>
+            <line class="dg-line" x1="446" y1="38" x2="464" y2="38" marker-end="url(#dgC)"/>
+
+            <rect class="dg-box dg-fill" x="0" y="98" width="600" height="40" rx="4"/>
+            <text class="dg-t" x="300" y="114" text-anchor="middle">one evaluation harness, built before any training</text>
+            <text class="dg-s" x="300" y="129" text-anchor="middle">official scorers · image-audited LLM judge · black-image test · paired 95% intervals</text>
+            <line class="dg-line" x1="222" y1="98" x2="222" y2="72" marker-end="url(#dgC)"/>
+            <line class="dg-line" x1="534" y1="98" x2="534" y2="72" marker-end="url(#dgC)"/>
+          </svg>
+          <figcaption>The harness comes first: it decides which datasets RL can learn from, then
+          scores every arm on the same questions.</figcaption>
+        </figure>
+
         <p class="links">
           <a href="https://github.com/guangboyu/vqa-rlvr">Code</a>
           <a href="https://guangboyu.github.io/vqa-rlvr/report/">Report</a>
@@ -288,6 +340,61 @@
         engineering side I took named-entity recognition for a brokerage chat platform from an LSTM
         pipeline to an ALBERT-based model (macro-F1 77 to 88), served under 100&nbsp;ms at p95 on CPU
         and rolled out by canary from 5% of users to all of them.</p>
+
+        <figure class="diagram">
+          <svg viewBox="0 0 660 138" role="img"
+               aria-label="Five stages: data in 11 languages; full-data fine-tuning of XLM-RoBERTa with adversarial training and augmentation; track-specific fine-tuning for the Chinese, multilingual and code-mixed tracks; an ensemble of 7 models by majority vote; and pseudo-label fine-tuning on gold plus pseudo-labelled data, whose labels come from the vote, looping back to the ensemble.">
+            <defs>
+              <marker id="dgD" viewBox="0 0 8 8" refX="7" refY="4"
+                      markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0 1 L7 4 L0 7" fill="none" stroke="currentColor"
+                      stroke-opacity="0.45" stroke-width="1.1"/>
+              </marker>
+            </defs>
+
+            <rect class="dg-box" x="0" y="8" width="96" height="90" rx="4"/>
+            <rect class="dg-box dg-fill" x="116" y="8" width="136" height="90" rx="4"/>
+            <rect class="dg-box" x="272" y="8" width="124" height="90" rx="4"/>
+            <rect class="dg-box" x="416" y="8" width="100" height="90" rx="4"/>
+            <rect class="dg-box" x="536" y="8" width="124" height="90" rx="4"/>
+
+            <text class="dg-t" x="48" y="42" text-anchor="middle">data in</text>
+            <text class="dg-t" x="48" y="57" text-anchor="middle">11 languages</text>
+            <text class="dg-s" x="48" y="74" text-anchor="middle">MultiCoNER</text>
+
+            <text class="dg-t" x="184" y="28" text-anchor="middle">full-data</text>
+            <text class="dg-t" x="184" y="43" text-anchor="middle">fine-tuning</text>
+            <text class="dg-s" x="184" y="60" text-anchor="middle">XLM-RoBERTa</text>
+            <text class="dg-s" x="184" y="74" text-anchor="middle">adversarial training</text>
+            <text class="dg-s" x="184" y="88" text-anchor="middle">data augmentation</text>
+
+            <text class="dg-t" x="334" y="28" text-anchor="middle">track-specific</text>
+            <text class="dg-t" x="334" y="43" text-anchor="middle">fine-tuning</text>
+            <text class="dg-s" x="334" y="60" text-anchor="middle">Chinese,</text>
+            <text class="dg-s" x="334" y="74" text-anchor="middle">multilingual,</text>
+            <text class="dg-s" x="334" y="88" text-anchor="middle">code-mixed</text>
+
+            <text class="dg-t" x="466" y="42" text-anchor="middle">ensemble</text>
+            <text class="dg-s" x="466" y="59" text-anchor="middle">7 models,</text>
+            <text class="dg-s" x="466" y="73" text-anchor="middle">majority vote</text>
+
+            <text class="dg-t" x="598" y="35" text-anchor="middle">pseudo-label</text>
+            <text class="dg-t" x="598" y="50" text-anchor="middle">fine-tuning</text>
+            <text class="dg-s" x="598" y="67" text-anchor="middle">gold + pseudo-</text>
+            <text class="dg-s" x="598" y="81" text-anchor="middle">labelled data</text>
+
+            <line class="dg-line" x1="98"  y1="53" x2="112" y2="53" marker-end="url(#dgD)"/>
+            <line class="dg-line" x1="254" y1="53" x2="268" y2="53" marker-end="url(#dgD)"/>
+            <line class="dg-line" x1="398" y1="53" x2="412" y2="53" marker-end="url(#dgD)"/>
+            <line class="dg-line" x1="518" y1="53" x2="532" y2="53" marker-end="url(#dgD)"/>
+
+            <path class="dg-line" d="M598 98 V114 H466 V102" marker-end="url(#dgD)"/>
+            <text class="dg-s" x="532" y="129" text-anchor="middle">pseudo labels come from the vote</text>
+          </svg>
+          <figcaption>Our SemEval-2022 multilingual NER system, redrawn from Figure&nbsp;1 of the
+          <a href="https://aclanthology.org/2022.semeval-1.228/">paper</a>. It placed third in the
+          multilingual track, fourth in code-mixed and seventh in Chinese.</figcaption>
+        </figure>
       </article>
 
       <article class="card">

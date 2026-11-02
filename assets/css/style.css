@@ -289,6 +289,7 @@ a:hover { color: var(--accent); }
 .diagram { margin: 1.15rem 0 0; overflow-x: auto; }
 .diagram svg {
   width: 100%; min-width: 30rem; height: auto; display: block; color: var(--n700);
+  overflow: visible;   /* keeps the outer box strokes at the viewBox edge */
 }
 .diagram figcaption { margin-top: .6rem; font-size: .8125rem; color: var(--n500); }
 
@@ -306,6 +307,8 @@ a:hover { color: var(--accent); }
   background: var(--n100);
 }
 .media figcaption { margin-top: .6rem; font-size: .8125rem; color: var(--n500); }
+/* Paper figures are drawn on white; keep them on a white plate in both themes. */
+.media--plate img { background: #fff; padding: .5rem; }
 
 /* ---------- 7. Tables ---------- */
 

@@ -101,6 +101,49 @@
         one harness, built to tell a real gain from a change in answer format, and use of the image
         from answers learned without it.</p>
 
+        <figure class="diagram">
+          <svg viewBox="0 0 600 142" role="img"
+               aria-label="Pipeline in four stages: pinned data with every test image hashed out of the training pools; a dataset screen that keeps only data where the image matters and RL gets a signal; three training arms, SFT, GRPO, and SFT then GRPO; and scoring every model on nine test sets with two prompts. One evaluation harness, built before any training, drives both the screen and the scoring.">
+            <defs>
+              <marker id="dgC" viewBox="0 0 8 8" refX="7" refY="4"
+                      markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0 1 L7 4 L0 7" fill="none" stroke="currentColor"
+                      stroke-opacity="0.45" stroke-width="1.1"/>
+              </marker>
+            </defs>
+
+            <rect class="dg-box" x="0"   y="8" width="132" height="60" rx="4"/>
+            <rect class="dg-box" x="156" y="8" width="132" height="60" rx="4"/>
+            <rect class="dg-box" x="312" y="8" width="132" height="60" rx="4"/>
+            <rect class="dg-box" x="468" y="8" width="132" height="60" rx="4"/>
+
+            <text class="dg-t" x="66"  y="30" text-anchor="middle">pinned data</text>
+            <text class="dg-s" x="66"  y="46" text-anchor="middle">frozen test sets,</text>
+            <text class="dg-s" x="66"  y="59" text-anchor="middle">test images kept out</text>
+            <text class="dg-t" x="222" y="30" text-anchor="middle">dataset screen</text>
+            <text class="dg-s" x="222" y="46" text-anchor="middle">image must matter,</text>
+            <text class="dg-s" x="222" y="59" text-anchor="middle">RL must get a signal</text>
+            <text class="dg-t" x="378" y="30" text-anchor="middle">train three arms</text>
+            <text class="dg-s" x="378" y="46" text-anchor="middle">SFT, GRPO,</text>
+            <text class="dg-s" x="378" y="59" text-anchor="middle">SFT then GRPO</text>
+            <text class="dg-t" x="534" y="30" text-anchor="middle">score every model</text>
+            <text class="dg-s" x="534" y="46" text-anchor="middle">9 test sets,</text>
+            <text class="dg-s" x="534" y="59" text-anchor="middle">2 prompts each</text>
+
+            <line class="dg-line" x1="134" y1="38" x2="152" y2="38" marker-end="url(#dgC)"/>
+            <line class="dg-line" x1="290" y1="38" x2="308" y2="38" marker-end="url(#dgC)"/>
+            <line class="dg-line" x1="446" y1="38" x2="464" y2="38" marker-end="url(#dgC)"/>
+
+            <rect class="dg-box dg-fill" x="0" y="98" width="600" height="40" rx="4"/>
+            <text class="dg-t" x="300" y="114" text-anchor="middle">one evaluation harness, built before any training</text>
+            <text class="dg-s" x="300" y="129" text-anchor="middle">official scorers · image-audited LLM judge · black-image test · paired 95% intervals</text>
+            <line class="dg-line" x1="222" y1="98" x2="222" y2="72" marker-end="url(#dgC)"/>
+            <line class="dg-line" x1="534" y1="98" x2="534" y2="72" marker-end="url(#dgC)"/>
+          </svg>
+          <figcaption>The harness comes first: it decides which datasets RL can learn from, then
+          scores every arm on the same questions.</figcaption>
+        </figure>
+
         <div class="table-scroll">
           <table class="results">
             <thead>
