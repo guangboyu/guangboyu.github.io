@@ -298,6 +298,7 @@ a:hover { color: var(--accent); }
 .dg-line { stroke: currentColor; stroke-opacity: .3; fill: none; }
 .dg-dash { stroke-dasharray: 3 4; }
 .dg-fill { fill: var(--accent); fill-opacity: .1; stroke: none; }
+.dg-bar  { fill: var(--accent); fill-opacity: .75; stroke: none; }
 .dg-t    { fill: currentColor; font-family: var(--font-sans); font-size: 12px; }
 .dg-s    { fill: currentColor; fill-opacity: .62; font-family: var(--font-sans); font-size: 10.5px; }
 
