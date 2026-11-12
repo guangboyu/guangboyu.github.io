@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Guangbo Yu</title>
-<meta name="description" content="PhD candidate at UC Irvine working on foundation models and multimodal learning, usually where the data is small and the evaluation is the hard part.">
+<meta name="description" content="PhD candidate at UC Irvine building foundation models for medical imaging: self-supervised pretraining, alignment with clinical reports, and post-training.">
 <meta name="author" content="Guangbo Yu">
 <link rel="canonical" href="https://guangboyu.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Guangbo Yu">
-<meta property="og:description" content="PhD candidate at UC Irvine working on foundation models and multimodal learning, usually where the data is small and the evaluation is the hard part.">
+<meta property="og:description" content="PhD candidate at UC Irvine building foundation models for medical imaging: self-supervised pretraining, alignment with clinical reports, and post-training.">
 <meta property="og:url" content="https://guangboyu.github.io/">
 <meta property="og:image" content="https://guangboyu.github.io/assets/img/profile.jpg">
 <meta name="twitter:card" content="summary">
@@ -130,26 +130,30 @@
       <div class="section__head"><h2>About</h2></div>
       <div class="prose">
         <p>I am a PhD candidate at UC&nbsp;Irvine, in Biomedical Engineering and Radiological
-        Sciences. I work on foundation models and multimodal learning, usually where the data is
-        small and the evaluation is the hard part.</p>
+        Sciences. I am building a foundation model for medical imaging in three steps: pretraining
+        on scans, aligning with radiology reports, then post-training.</p>
 
-        <p>Most of my work starts from the same constraint. Clinical datasets are limited, and the
-        thing worth predicting, how a tumor is actually behaving, sits inside a biopsy. Imaging is the
-        opposite: non-invasive, repeatable, and already part of standard care, but it shows anatomy
-        rather than biology. My PhD is about closing that gap with models pretrained elsewhere, so that
-        the biology is what gets learned here, not the representation.</p>
+        <p>My PhD began in the lab, where I led the experiments for my first studies. We followed
+        tumors in mice and rats with MRI through treatment, and validated our MRI models against
+        pathology from the same tumors. Running that pipeline taught me how imaging data is made, long
+        before it reaches a model. The latest of those studies, our
+        <a href="https://www.sciencedirect.com/science/article/pii/S2352396426004299"><i>eBioMedicine</i>
+        paper</a>, shows that features from a frozen, general-purpose foundation model can read a
+        pancreatic tumor's immune and stromal makeup from mouse MRI and from patient CT.</p>
 
-        <p>A version of the same question comes up outside medicine: is the model using the image, or
-        something easier? Post-training a vision-language model, I compared reinforcement learning
-        against plain supervised fine-tuning on the same data. RL earns its place where reasoning pays,
-        about ten points on chart questions, and its gains mostly vanish when the image is blacked out,
-        as they should. Fine-tuning's partly survive: the model has learned answers it can give without
-        looking. Applied to two 3D CT benchmarks, the same test showed that most of their published
-        accuracy was reachable without the scan.</p>
+        <p>Now I am pretraining my own, built for medical imaging, on more than 7 million CT and MRI
+        slices. Self-supervised learning teaches it the image at the level of local patches and their
+        spatial layout. Contrastive learning with radiology reports adds patient-level information.
+        Because reports are text, this step also connects the model to language, which is what
+        post-training works with.</p>
 
-        <p>Both lines of work arrive at the same place. A number is worth what you checked it against,
-        which is why the medical models are held against stained tissue and the language models
-        against a blacked-out image.</p>
+        <p>Post-training comes next, and two of my projects prepare for it. In a
+        <a href="https://guangboyu.github.io/vqa-rlvr/report/">controlled comparison on Qwen3-VL</a>,
+        supervised fine-tuning followed by reinforcement learning worked best on medical questions,
+        raising SLAKE accuracy from 58.1% to 78.2% at 8B. My recent
+        <a href="blog/reward-design.html">systematic review</a> looks at how reward functions are
+        designed and evaluated when medical imaging models are trained with RL. I will use both when I
+        post-train my own model.</p>
 
         <p>Before the PhD I spent two years as an NLP engineer at Tencent QTrade, building named-entity
         models for a brokerage chat platform with more than 500,000 daily users. That is where I learned
@@ -167,7 +171,7 @@
       <article class="card">
         <h3 class="card__title">Reading tumor biology from a scan the patient already gets</h3>
         <p class="card__meta">Pancreatic cancer, mouse 9.4T MRI and patient CT.
-        <i>eBioMedicine</i>, in press.</p>
+        <i>eBioMedicine</i> (2026).</p>
 
         <p class="card__body">Reading a pancreatic tumor's immune and stromal makeup takes a biopsy
         today. We asked whether one imaging pipeline can read it from mouse MRI and from the CT
@@ -204,6 +208,10 @@
         <p class="card__takeaway">Mouse MRI, checked against whole-tumor histology, can nominate CT
         biomarkers that turn a routine scan into a noninvasive readout of tumor immunity and
         stroma.</p>
+
+        <p class="links">
+          <a href="https://doi.org/10.1016/j.ebiom.2026.106545">Paper</a>
+        </p>
       </article>
 
       <article class="card">
