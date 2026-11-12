@@ -177,33 +177,37 @@
         today. We asked whether one imaging pipeline can read it from mouse MRI and from the CT
         patients already get.</p>
 
-        <figure class="media media--plate media--narrow">
-          <img src="assets/img/pdac-methods.webp" width="1400" height="1274" loading="lazy"
-               alt="Methods. Mouse: KPC-derived tumors in 4 treatment arms, imaged with weekly 9.4 T MRI (169 sessions). Human: the CPTAC-PDA cohort, contrast-enhanced abdominal CT. Both go through frozen foundation-model encoders (DINOv3, MedSAM and others), then classical classifiers (LogReg, SVM, RF, XGBoost). Mouse predictions are evaluated against histology and survival with leave-one-mouse-out cross-validation; human predictions against proteogenomics and survival with patient-grouped 5-fold cross-validation.">
-        </figure>
+        <div class="split">
+          <div class="split__row">
+            <figure class="media media--plate media--narrow">
+              <a href="assets/img/pdac-methods.webp"><img src="assets/img/pdac-methods.webp" width="1400" height="1274" loading="lazy"
+                 alt="Methods. Mouse: KPC-derived tumors in 4 treatment arms, imaged with weekly 9.4 T MRI (169 sessions). Human: the CPTAC-PDA cohort, contrast-enhanced abdominal CT. Both go through frozen foundation-model encoders (DINOv3, MedSAM and others), then classical classifiers (LogReg, SVM, RF, XGBoost). Mouse predictions are evaluated against histology and survival with leave-one-mouse-out cross-validation; human predictions against proteogenomics and survival with patient-grouped 5-fold cross-validation."></a>
+            </figure>
 
-        <div class="table-scroll">
-          <table class="results results--wide">
-            <thead>
-              <tr><th scope="col">Biomarker</th><th scope="col">Mouse MRI</th><th scope="col">Patient CT</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>CD8 infiltration<small>CD8 density (IHC) &middot; CD8A protein</small></td><td>0.94</td><td>0.81</td></tr>
-              <tr><td>Stromal collagen<small>trichrome collagen &middot; COL1A1 protein</small></td><td>0.96</td><td>0.78</td></tr>
-              <tr><td>CD8:CD68 balance<small>CD8:CD68 density &middot; CD8A:macrophage protein</small></td><td>0.94</td><td>0.86</td></tr>
-              <tr><td>Antitumor response<small>histology composite score &middot; cytolytic activity (RNA)</small></td><td>0.95</td><td>0.80</td></tr>
-            </tbody>
-          </table>
+            <div class="table-scroll">
+              <table class="results results--wide">
+                <thead>
+                  <tr><th scope="col">Biomarker</th><th scope="col">Mouse MRI</th><th scope="col">Patient CT</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>CD8 infiltration<small>CD8 density (IHC) &middot; CD8A protein</small></td><td>0.94</td><td>0.81</td></tr>
+                  <tr><td>Stromal collagen<small>trichrome collagen &middot; COL1A1 protein</small></td><td>0.96</td><td>0.78</td></tr>
+                  <tr><td>CD8:CD68 balance<small>CD8:CD68 density &middot; CD8A:macrophage protein</small></td><td>0.94</td><td>0.86</td></tr>
+                  <tr><td>Antitumor response<small>histology composite score &middot; cytolytic activity (RNA)</small></td><td>0.95</td><td>0.80</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <p class="table-note">AUROC per biomarker, each against its own ground truth (mouse &middot;
+          patient). Fine-tuning the same network end to end peaked at 0.63 and 0.70.</p>
+
+          <figure class="media media--plate media--chart split__row split__row--middle">
+            <img src="assets/img/pdac-cindex-compact.webp" width="1095" height="585" loading="lazy"
+                 alt="Survival concordance index in patients: clinical variables (age, stage, grade) 0.61; imaging score 0.69; clinical plus imaging 0.73.">
+            <figcaption>Added value over clinical staging, in patients: the CT score stays prognostic
+            after adjusting for age, stage and grade (HR 1.87 per SD).</figcaption>
+          </figure>
         </div>
-        <p class="table-note">AUROC per biomarker, each against its own ground truth (mouse &middot;
-        patient). Fine-tuning the same network end to end peaked at 0.63 and 0.70.</p>
-
-        <figure class="media media--plate media--narrow">
-          <img src="assets/img/pdac-cindex.webp" width="1600" height="489" loading="lazy"
-               alt="Survival concordance index in patients: clinical variables (age, stage, grade) 0.61; imaging score 0.69; clinical plus imaging 0.73.">
-          <figcaption>Added value over clinical staging, in patients: the CT score stays prognostic
-          after adjusting for age, stage and grade (HR 1.87 per SD).</figcaption>
-        </figure>
 
         <p class="card__takeaway">Mouse MRI, checked against whole-tumor histology, can nominate CT
         biomarkers that turn a routine scan into a noninvasive readout of tumor immunity and
