@@ -81,8 +81,7 @@
   <main id="main">
 
     <h1 class="page-title">Projects</h1>
-    <p class="lede">Work outside the papers. Where the code is public it is linked, so the numbers
-    can be checked rather than taken on trust.</p>
+    <p class="lede">Work outside the papers. Code is linked where public.</p>
 
     <section class="section">
       <div class="section__head"><h2>Personal Work</h2></div>
@@ -307,11 +306,10 @@
         <h3 class="card__title">Fixing the labels instead of the model</h3>
         <p class="card__meta">Two data-curation pipelines with a foundation model in the loop.
         &nbsp;<span class="stamp">2026</span></p>
-        <p class="card__body">Our results had stopped improving, and the reason was not the
-        architecture. It was that annotation is slow, and slow annotation means noisy labels. One
-        pipeline re-segments thousands of preclinical MRI timepoints with MedSAM2 and cross-checks each
-        result against geometric sanity tests, so a human reviewer only has to keep, accept, or edit.
-        The other replaced whole-slide annotation across a five-stain pathology cohort.</p>
+        <p class="card__body">One pipeline re-segments thousands of preclinical MRI timepoints with
+        MedSAM2 and cross-checks each result against geometric sanity tests, so a human reviewer only
+        has to keep, accept, or edit. The other replaced manual whole-slide annotation across a
+        five-stain pathology cohort with foundation-model pre-annotation that a reviewer checks.</p>
         <p class="card__body">Swapping the cleaned labels into an unchanged downstream model moved
         prognosis AUROC from 0.70 to 0.90, at about a fifth of the annotation time the lab had
         budgeted. It also surfaced the strongest signal in the dataset, an immune-cell ratio the
