@@ -129,36 +129,39 @@
     <section class="section">
       <div class="section__head"><h2>About</h2></div>
       <div class="prose">
-        <p>I am a PhD candidate at UC&nbsp;Irvine, in Biomedical Engineering and Radiological
-        Sciences. I am building a foundation model for medical imaging in three steps: pretraining
-        on scans, aligning with radiology reports, then post-training.</p>
+        <p>I am a PhD candidate at UC&nbsp;Irvine in Biomedical Engineering and Radiological Sciences.
+        I work on foundation models for medical imaging, from pretraining to RL post-training. My goal
+        is a model clinicians can rely on: one that knows when it is unsure and shows the evidence in
+        the image behind each answer. I have published more than 20 peer-reviewed papers, with more
+        than 10 as first author.</p>
 
-        <p>My PhD began in the lab, where I led the experiments for my first studies. We followed
-        tumors in mice and rats with MRI through treatment, and validated our MRI models against
-        pathology from the same tumors. Running that pipeline taught me how imaging data is made, long
-        before it reaches a model. The latest of those studies, our
+        <p>My PhD started in the lab. I led the experiments for my first studies: we tracked tumors in
+        mice and rats with MRI through treatment, and validated our imaging models against pathology
+        from the same tumors. That taught me how imaging data is made, long before it reaches a model.
+        The latest of these studies, my first-author
         <a href="https://www.sciencedirect.com/science/article/pii/S2352396426004299"><i>eBioMedicine</i>
         paper</a>, shows that features from a frozen, general-purpose foundation model can read a
-        pancreatic tumor's immune and stromal makeup from mouse MRI and from patient CT.</p>
+        pancreatic tumor's immune and stromal makeup from both mouse MRI and patient CT. If a general
+        model already sees this much, a model built for medical imaging should see more.</p>
 
-        <p>Now I am pretraining my own, built for medical imaging, on more than 7 million CT and MRI
-        slices. Self-supervised learning teaches it the image at the level of local patches and their
-        spatial layout. Contrastive learning with radiology reports adds patient-level information.
-        Because reports are text, this step also connects the model to language, which is what
-        post-training works with.</p>
+        <p>That is the model I am building now, pretrained on more than 7 million CT and MRI slices.
+        Self-supervised learning teaches it local anatomy and spatial layout. Contrastive learning with
+        radiology reports adds patient-level context. Because reports are text, this step also connects
+        the model to language, which is where post-training happens.</p>
 
-        <p>Post-training comes next, and two of my projects prepare for it. In a
+        <p>For that last step, I have already tested the method on an existing model. In a
         <a href="https://guangboyu.github.io/vqa-rlvr/report/">controlled comparison on Qwen3-VL</a>,
-        supervised fine-tuning followed by reinforcement learning worked best on medical questions,
-        raising SLAKE accuracy from 58.1% to 78.2% at 8B. My recent
-        <a href="blog/reward-design.html">systematic review</a> looks at how reward functions are
-        designed and evaluated when medical imaging models are trained with RL. I will use both when I
-        post-train my own model.</p>
+        SFT followed by RL worked best on medical VQA, raising SLAKE accuracy from 58.1% to 78.2% at
+        8B. My <a href="blog/reward-design.html">systematic review</a> maps how reward functions are
+        designed and evaluated when medical imaging models are trained with RL. Rewards are where
+        reliability gets built in: they can teach a model to say when it is unsure and to tie each
+        answer to what it sees.</p>
 
-        <p>Before the PhD I spent two years as an NLP engineer at Tencent QTrade, building named-entity
-        models for a brokerage chat platform with more than 500,000 daily users. That is where I learned
-        what a wrong prediction costs once it is serving live traffic. Away from research I photograph
-        landscapes, mostly in the American West.</p>
+        <p>Before the PhD, I spent two years as an NLP engineer at Tencent QTrade. I led a team of four
+        building named-entity models for a brokerage chat platform with more than 500,000 daily users.
+        That is where I learned what a wrong prediction costs on live traffic.</p>
+
+        <p>Away from research, I photograph landscapes, mostly in the American West.</p>
       </div>
     </section>
 
