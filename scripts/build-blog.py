@@ -182,10 +182,50 @@ def contents(body: str) -> str:
     if len(items) < 3:
         return ""
     lis = "\n".join(f'      <li><a href="#{i}">{t}</a></li>' for i, t in items)
-    return ('    <nav class="post-toc" aria-label="Contents">\n'
+    return ('    <nav class="post-toc post-toc--inline" aria-label="Contents">\n'
             '      <p>Contents</p>\n'
             f'      <ol>\n{lis}\n      </ol>\n'
             '    </nav>\n')
+
+
+def outline(body: str) -> str:
+    """Every h2 with the h3s under it, as a nested list. Empty for short pages."""
+    heads = re.findall(r'<h([23]) id="([^"]+)">(.*?)</h\1>', body)
+    if sum(1 for level, _, _ in heads if level == "2") < 3:
+        return ""
+    out, in_h2, in_sub = ["<ul>"], False, False
+    for level, ident, text in heads:
+        text = re.sub(r"</?a\b[^>]*>", "", text)
+        if level == "2":
+            if in_h2:
+                out.append("</ul></li>" if in_sub else "</li>")
+            out.append(f'<li><a href="#{ident}">{text}</a>')
+            in_h2, in_sub = True, False
+        elif in_h2:
+            if not in_sub:
+                out.append("<ul>")
+                in_sub = True
+            out.append(f'<li><a href="#{ident}">{text}</a></li>')
+    out += ["</ul></li>" if in_sub else "</li>", "</ul>"]
+    return "\n".join(out)
+
+
+def side_toc(items: str) -> str:
+    """The contents again, as a sticky column on the right of wide screens."""
+    if not items:
+        return ""
+    return ('  <aside class="post-side">\n'
+            '    <nav class="side-toc" aria-label="On this page">\n'
+            '      <p>On this page</p>\n'
+            f'{items}\n'
+            '    </nav>\n'
+            '  </aside>')
+
+
+def with_side(main: str, side: str) -> str:
+    if not side:
+        return main
+    return f'<div class="post-layout has-side">\n{main}\n{side}\n</div>'
 
 
 def math_font(body: str) -> str:
@@ -327,7 +367,7 @@ def render_post(post: dict) -> tuple[str, int]:
         extra=f'<meta property="article:published_time" content="{post["date"]}">\n')
     return page(prefix="../", title=f"{e(title)} — {AUTHOR}", meta=meta,
                 fonts=math_font(body), ld=ld, source=f"blog/{post['slug']}.md",
-                main=main), minutes
+                main=with_side(main, side_toc(outline(body)))), minutes
 
 
 # ---------- LeetCode patterns: reading the tutorials ----------
@@ -622,15 +662,15 @@ def tutorial_html(t: dict, by_file: dict[str, dict]) -> str:
     return body
 
 
-def tutorial_toc(t: dict, body: str) -> str:
-    if t["toc_md"]:
-        items = pandoc_gfm(t["toc_md"]).strip()
-    else:
-        heads = re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', body)
-        if len(heads) < 3:
-            return ""
-        items = "<ul>\n" + "\n".join(f'<li><a href="#{i}">{h}</a></li>' for i, h in heads) + "\n</ul>"
-    return ('    <nav class="post-toc post-toc--nested" aria-label="Contents">\n'
+def toc_items(t: dict, body: str) -> str:
+    """The tutorial's own contents list if it has one, else its h2s and h3s."""
+    return pandoc_gfm(t["toc_md"]).strip() if t["toc_md"] else outline(body)
+
+
+def tutorial_toc(items: str) -> str:
+    if not items:
+        return ""
+    return ('    <nav class="post-toc post-toc--nested post-toc--inline" aria-label="Contents">\n'
             '      <p>Contents</p>\n'
             f'{items}\n'
             '    </nav>\n')
@@ -656,6 +696,7 @@ def render_tutorial(t: dict, body: str, prev: dict | None, nxt: dict | None,
     intro, _, rest = body.rpartition(f"<p>{TOC_MARK}</p>")
     body = rest.strip("\n")
     intro = f'    <div class="post-body post-body--intro">\n{intro.strip()}\n    </div>\n\n' if intro.strip() else ""
+    items = toc_items(t, body)
     dek = re.sub(r"^<p>|</p>\s*$", "", pandoc_gfm(t["dek_md"]).strip()) if t["dek_md"] else ""
     when = (long_date(t["updated"]) if t["updated"] == t["created"]
             else f"Updated {long_date(t['updated'])}")
@@ -694,7 +735,7 @@ def render_tutorial(t: dict, body: str, prev: dict | None, nxt: dict | None,
       <p class="post-meta">{AUTHOR} &middot; <time datetime="{t['updated'].isoformat()}">{when}</time> &middot; {t['minutes']} min read</p>
     </header>
 
-{intro}{tutorial_toc(t, body)}
+{intro}{tutorial_toc(items)}
     <article class="post-body">
 {body}
     </article>{pager}
@@ -706,7 +747,7 @@ def render_tutorial(t: dict, body: str, prev: dict | None, nxt: dict | None,
                f'<meta property="article:modified_time" content="{t["updated"].isoformat()}">\n'))
     return page(prefix="../../", title=f"{e(t['title'])} · {LC_NAME} — {AUTHOR}",
                 meta=meta, fonts=math_font(body), ld=ld,
-                source=f"blog/leetcode/{t['file']}", main=main)
+                source=f"blog/leetcode/{t['file']}", main=with_side(main, side_toc(items)))
 
 
 def route_html(route: list[dict], by_file: dict[str, dict]) -> str:

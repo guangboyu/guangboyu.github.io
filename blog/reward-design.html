@@ -66,6 +66,7 @@
 </header>
 
 <div class="shell">
+<div class="post-layout has-side">
   <main id="main" class="post">
     <header class="post-head">
       <p class="post-back"><a href="../blog.html">&larr; Blog</a></p>
@@ -75,7 +76,7 @@
       <p class="post-meta">Guangbo Yu &middot; <time datetime="2026-11-02">2 November 2026</time> &middot; 15 min read</p>
     </header>
 
-    <nav class="post-toc" aria-label="Contents">
+    <nav class="post-toc post-toc--inline" aria-label="Contents">
       <p>Contents</p>
       <ol>
       <li><a href="#tldr">TL;DR</a></li>
@@ -321,6 +322,42 @@ else:              r = 1.0 if s &lt;= 0.45 else 1 - 2 * s</code></pre>
 
     </article>
   </main>
+  <aside class="post-side">
+    <nav class="side-toc" aria-label="On this page">
+      <p>On this page</p>
+<ul>
+<li><a href="#tldr">TL;DR</a>
+</li>
+<li><a href="#why-rewards">Why rewards</a>
+</li>
+<li><a href="#the-reward-cookbook">The reward cookbook</a>
+<ul>
+<li><a href="#answer-key-plus-format-the-r1-recipe">1. Answer key plus format (the R1 recipe)</a></li>
+<li><a href="#graded-credit-for-ordinal-and-hierarchical-labels">2. Graded credit for ordinal and hierarchical labels</a></li>
+<li><a href="#report-rewards-from-labellers-and-learned-metrics">3. Report rewards from labellers and learned metrics</a></li>
+<li><a href="#text-overlap-and-embedding-similarity">4. Text overlap and embedding similarity</a></li>
+<li><a href="#box-and-mask-overlap">5. Box and mask overlap</a></li>
+<li><a href="#reasoning-and-process-rewards-gated-on-the-answer">6. Reasoning and process rewards, gated on the answer</a></li>
+<li><a href="#model-judges-and-rubric-rewards">7. Model judges and rubric rewards</a></li>
+<li><a href="#a-calibration-term">8. A calibration term</a></li>
+<li><a href="#preference-pairs-for-dpo-built-around-clinical-errors">9. Preference pairs for DPO, built around clinical errors</a></li>
+<li><a href="#labels-anchored-to-a-confirmed-diagnosis-or-outcome">10. Labels anchored to a confirmed diagnosis or outcome</a></li>
+<li><a href="#combining-terms">Combining terms</a></li>
+</ul></li>
+<li><a href="#how-rewards-go-wrong">How rewards go wrong</a>
+</li>
+<li><a href="#does-rl-beat-more-sft">Does RL beat more SFT?</a>
+</li>
+<li><a href="#what-to-do-a-recipe">What to do: a recipe</a>
+</li>
+<li><a href="#where-it-is-heading">Where it is heading</a>
+</li>
+<li><a href="#closing">Closing</a>
+</li>
+</ul>
+    </nav>
+  </aside>
+</div>
 </div>
 
 <div class="shell">

@@ -108,8 +108,10 @@ generated page.
 
 The body is ordinary Markdown. `$...$` and `$$...$$` become MathML, so equations render
 with no JavaScript (the page loads Noto Sans Math for the glyphs). Pipe tables scroll
-sideways on phones. Each `## heading` lands in the contents box at the top. A paragraph
-that starts with `**What to do:**` is set as a callout. Figures go in `blog/img/`, written
+sideways on phones. Each `## heading` lands in the contents box at the top. On screens
+wider than 72rem that box moves into a sticky column on the right, which also lists the
+`###` headings and marks the section being read (a few lines in `assets/js/site.js`;
+without JavaScript it is still a working list of links). A paragraph that starts with `**What to do:**` is set as a callout. Figures go in `blog/img/`, written
 as an image followed on the next line by an italic caption:
 
 ```
