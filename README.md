@@ -12,16 +12,18 @@ look, so there is nothing to install or upgrade.
 index.html             About, with the sidebar and representative work
 publications.html      Papers, generated from publications.bib
 projects.html          Code and work outside the papers
-blog.html              Post list, generated from blog/*.md
+blog.html              Post list and LeetCode section, generated
 blog/<slug>.md         A post (Markdown); blog/<slug>.html is generated from it
 blog/img/              Post figures
+blog/leetcode/         LeetCode pattern tutorials, their assets and generated pages
+inbox/                 Drop zone for new tutorials (not committed)
 photography.html       Gallery, generated from assets/js/photos.js
 publications.bib       The publication list you actually edit
 assets/css/style.css   The whole design system, one file
 assets/img/profile.jpg Headshot shown in the sidebar
 assets/js/             Theme toggle, gallery, generated photo manifest
 assets/photos/         Photos (see below)
-scripts/               Publication and photo build scripts
+scripts/               Build scripts for publications, blog, photos; the tutorial import
 ```
 
 ---
@@ -119,6 +121,39 @@ Convert PNG figures to lossless WebP first, which cuts them to about a third:
 `convert in.png -alpha off -define webp:lossless=true blog/img/out.webp`.
 
 Requires pandoc (`sudo apt install pandoc`). The generated pages need nothing at runtime.
+
+---
+
+## LeetCode patterns
+
+The tutorials are written elsewhere, for GitHub, and come in through `inbox/`. Dump new
+or updated files there in any shape (the whole `tutorials/` folder, or just the changed
+`.md` files and their GIFs), then run:
+
+```bash
+python3 scripts/import-leetcode.py      # --dry-run to preview, --keep to leave inbox/ alone
+```
+
+It copies each tutorial to `blog/leetcode/<Name>.md` with the images it references,
+refreshes the study route from the README's status table, deletes assets no tutorial
+uses any more, runs `build-blog.py`, and empties `inbox/`. Anything else in the dump,
+such as the animation generator, is deleted with it, so keep the originals where you
+write them.
+
+```
+blog/leetcode/<Name>.md    a tutorial, as written; <name>.html is generated next to it
+blog/leetcode/assets/      the GIFs and figures the tutorials reference
+blog/leetcode/route.md     the 22-pattern study route shown on the index page
+blog/leetcode/index.md     the index page's intro and colour key (edit freely)
+blog/leetcode/img/         flowcharts drawn from the tutorials' mermaid blocks
+```
+
+The tutorials need no front matter: the `# Title` line is the title, the paragraph under
+it is the summary, a `## Contents` list becomes the contents box, and the date comes from
+git. Difficulty cells (`Easy`, `Med`, `Hard`) are coloured and 🔥 frequency cells become
+three dots. Animations may run wider than the text column, up to their natural width.
+Mermaid blocks are drawn once with mermaid-cli through `npx` (Node is needed only when a
+diagram changes; the SVGs are committed).
 
 ---
 

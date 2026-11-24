@@ -12,3 +12,7 @@ Thumbs.db
 desktop.ini
 *.swp
 __pycache__/
+
+# Drop zone for LeetCode tutorials; scripts/import-leetcode.py empties it.
+inbox/*
+!inbox/README.md

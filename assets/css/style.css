@@ -33,6 +33,16 @@
   --font-serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
   --font-mono:  "SF Mono", ui-monospace, Monaco, "Cascadia Code", Consolas, monospace;
 
+  /* Code and LeetCode tables */
+  --code-kw:  #7c3aed;
+  --code-fn:  #1d4ed8;
+  --code-str: #047857;
+  --code-num: #b45309;
+  --code-com: #64748b;
+  --lvl-easy: #0f766e;
+  --lvl-med:  #b45309;
+  --lvl-hard: #be123c;
+
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow:    0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -52,6 +62,8 @@
     --n50: #0f172a; --n100: #1e293b; --n200: #334155; --n300: #475569;
     --n400: #64748b; --n500: #94a3b8; --n600: #cbd5e1; --n700: #e2e8f0;
     --n800: #f1f5f9; --n900: #f8fafc;
+    --code-kw: #c4b5fd; --code-fn: #93c5fd; --code-str: #6ee7b7; --code-num: #fcd34d;
+    --code-com: #94a3b8; --lvl-easy: #5eead4; --lvl-med: #fbbf24; --lvl-hard: #fda4af;
   }
 }
 
@@ -61,6 +73,8 @@
   --n50: #f8fafc; --n100: #f1f5f9; --n200: #e2e8f0; --n300: #cbd5e1;
   --n400: #94a3b8; --n500: #64748b; --n600: #475569; --n700: #334155;
   --n800: #1e293b; --n900: #0f172a;
+  --code-kw: #7c3aed; --code-fn: #1d4ed8; --code-str: #047857; --code-num: #b45309;
+  --code-com: #64748b; --lvl-easy: #0f766e; --lvl-med: #b45309; --lvl-hard: #be123c;
 }
 :root[data-theme="dark"] {
   --bg: #0f172a; --fg: #f8fafc; --card: #1e293b;
@@ -68,6 +82,8 @@
   --n50: #0f172a; --n100: #1e293b; --n200: #334155; --n300: #475569;
   --n400: #64748b; --n500: #94a3b8; --n600: #cbd5e1; --n700: #e2e8f0;
   --n800: #f1f5f9; --n900: #f8fafc;
+  --code-kw: #c4b5fd; --code-fn: #93c5fd; --code-str: #6ee7b7; --code-num: #fcd34d;
+  --code-com: #94a3b8; --lvl-easy: #5eead4; --lvl-med: #fbbf24; --lvl-hard: #fda4af;
 }
 
 /* ---------- 2. Reset ---------- */
@@ -525,6 +541,121 @@ table.post-table td:first-child { color: var(--n900); font-weight: 500; }
 .post-body hr { border: 0; border-top: 1px solid var(--n200); margin: 2.5rem 0 1.25rem; }
 .post-body hr.post-end ~ p { font-size: .875rem; color: var(--n500); }
 
+/* ---------- 9b. LeetCode patterns ---------- */
+
+/* Pull quotes and small headings, which the tutorials lean on. */
+.post-body blockquote {
+  margin: 1.5rem 0; padding: .15rem 0 .15rem 1.1rem;
+  border-left: 3px solid var(--accent);
+  font-family: var(--font-serif); font-size: 1.125rem; line-height: 1.6; color: var(--n800);
+}
+.post-body blockquote p { margin-bottom: .5em; }
+.post-body blockquote code { font-size: .78em; }
+.post-body h4 { font-family: var(--font-sans); font-weight: 600; font-size: 1rem;
+  color: var(--n800); margin: 1.75rem 0 .45rem; scroll-margin-top: 5rem; }
+.post-dek code {
+  font-family: var(--font-mono); font-size: .84em;
+  background: var(--n100); border-radius: .3rem; padding: .1em .35em;
+}
+
+/* Each section opens with its own rule. */
+.post--tutorial .post-body h2 {
+  margin-top: 3.25rem; padding-top: 2.25rem; border-top: 1px solid var(--n200);
+}
+.post--tutorial .post-body > h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+.post--tutorial .post-body hr { margin: 2.5rem 0; }
+
+/* The contents box keeps the tutorial's own nesting. */
+.post-toc--nested ul { margin: 0; padding-left: 1.1rem; list-style: disc; color: var(--n400); }
+.post-toc--nested > ul { columns: 2; column-gap: 2rem; }
+.post-toc--nested > ul > li { break-inside: avoid; padding: .1rem 0; }
+.post-toc--nested ul ul { padding-left: 1rem; list-style: circle; font-size: .875rem; }
+.post-toc--nested ul ul li { padding: .05rem 0; }
+@media (max-width: 36em) { .post-toc--nested > ul { columns: 1; } }
+
+/* Figures may run wider than the text, up to their natural width: the
+   animations put data and code side by side and need the room. The build
+   writes --fig-w; on a phone the figure is simply the column's width. */
+.post-fig--wide {
+  --w: min(var(--fig-w, 100%), 72rem, 100vw - 2 * var(--gutter));
+  width: var(--w); margin-left: calc((100% - var(--w)) / 2);
+}
+.post-fig--wide figcaption { max-width: 46rem; margin-inline: auto; }
+.post-fig--diagram img { padding: 1rem; }
+
+/* Highlighted code. */
+.post-body .sourceCode .kw, .post-body .sourceCode .cf,
+.post-body .sourceCode .im, .post-body .sourceCode .at { color: var(--code-kw); }
+.post-body .sourceCode .bu, .post-body .sourceCode .fu,
+.post-body .sourceCode .dt { color: var(--code-fn); }
+.post-body .sourceCode .st, .post-body .sourceCode .ss, .post-body .sourceCode .vs,
+.post-body .sourceCode .ch, .post-body .sourceCode .sc { color: var(--code-str); }
+.post-body .sourceCode .dv, .post-body .sourceCode .bn,
+.post-body .sourceCode .fl, .post-body .sourceCode .cn { color: var(--code-num); }
+.post-body .sourceCode .co, .post-body .sourceCode .do,
+.post-body .sourceCode .an, .post-body .sourceCode .cv { color: var(--code-com); font-style: italic; }
+
+/* Problem tables: code never breaks mid-token, difficulty in its colour,
+   frequency as three dots. */
+.post--tutorial table.post-table code { white-space: nowrap; }
+.lvl { font-weight: 600; font-size: .75rem; letter-spacing: .02em; white-space: nowrap; }
+.lvl--easy { color: var(--lvl-easy); }
+.lvl--med  { color: var(--lvl-med); }
+.lvl--hard { color: var(--lvl-hard); }
+.heat { display: inline-flex; gap: .2rem; padding-top: .3rem; white-space: nowrap; }
+.heat i {
+  width: .45rem; height: .45rem; border-radius: 50%;
+  border: 1px solid var(--accent-deep); opacity: .45;
+}
+.heat i.on { background: var(--accent); border-color: var(--accent); opacity: 1; }
+
+/* Previous and next pattern. */
+.post-pager {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  margin-top: 3.5rem; padding-top: 1.75rem; border-top: 1px solid var(--n200);
+}
+.post-pager a {
+  display: block; padding: .9rem 1.1rem; border: 1px solid var(--n200);
+  border-radius: var(--radius); background: var(--n50);
+}
+.post-pager a:hover { border-color: var(--n300); }
+.post-pager span {
+  display: block; font-size: .72rem; font-weight: 600; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--n400);
+}
+.post-pager strong { display: block; margin-top: .15rem; color: var(--n900); font-weight: 600; }
+.post-pager .next { grid-column: 2; text-align: right; }
+
+/* The study route on the LeetCode index. */
+.route__progress { color: var(--n500); }
+.post-body ol.route {
+  list-style: none; padding: 0; margin: 1.25rem 0 2.5rem; border-top: 1px solid var(--n200);
+}
+.route li {
+  display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: 0 .75rem;
+  margin: 0; padding: .7rem 0; border-bottom: 1px solid var(--n200); line-height: 1.5;
+}
+.route__num { font-family: var(--font-mono); font-size: .8125rem; color: var(--n400); padding-top: .15rem; }
+.route__name { font-weight: 500; color: var(--n400); }
+.route .is-written .route__name { font-weight: 600; }
+.post-body .route a.route__name { color: var(--n900); text-decoration: none; }
+.post-body .route a.route__name:hover { color: var(--accent-deep); }
+.route__status { margin-left: .4rem; font-size: .75rem; color: var(--n400); }
+.route__dek, .route__meta { margin: .2rem 0 0; font-size: .9375rem; color: var(--n500); }
+.route__meta { font-size: .8125rem; color: var(--n400); }
+.post-body p.route__dek, .post-body p.route__meta { margin-bottom: 0; }
+
+/* The colour key for the animations. */
+.swatch {
+  display: inline-block; width: .95rem; height: .95rem; vertical-align: -.12rem;
+  margin-right: .35rem; border-radius: .2rem;
+  background: var(--fill); border: 1.5px solid var(--edge);
+}
+.post-body ul:has(> li > .swatch) { list-style: none; padding-left: 0; }
+
+/* The LeetCode section on the blog page. */
+.section__lede { margin: -.4rem 0 1.15rem; color: var(--n500); font-size: .9375rem; }
+
 /* ---------- 10. Footer ---------- */
 
 .site-foot {
@@ -537,7 +668,7 @@ table.post-table td:first-child { color: var(--n900); font-weight: 500; }
 /* ---------- 11. Print ---------- */
 
 @media print {
-  .topbar, .rail, .site-foot, .lightbox, .post-toc, .post-back { display: none; }
+  .topbar, .rail, .site-foot, .lightbox, .post-toc, .post-back, .post-pager { display: none; }
   .layout { grid-template-columns: 1fr; }
   body { background: #fff; color: #000; font-size: 10.5pt; }
   .card { break-inside: avoid; border-color: #ddd; }
